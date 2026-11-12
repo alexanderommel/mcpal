@@ -1,6 +1,6 @@
 // Remote MCP endpoint: Streamable HTTP, stateless (JSON responses, no session id), one isolated
 // MCPal ledger per demo key, real PayPal sandbox. Connect with
-//   claude mcp add --transport http mcpal "https://mcpal.vercel.app/mcp?key=<demo key>"
+//   claude mcp add --transport http mcpal "https://mcpal.app/mcp?key=<demo key>"
 import { WebStandardStreamableHTTPServerTransport } from "@modelcontextprotocol/sdk/server/webStandardStreamableHttp.js";
 import { createMcpServer } from "mcpal";
 import {

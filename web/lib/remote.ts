@@ -1,4 +1,4 @@
-// Hosted remote MCP (https://mcpal.vercel.app/mcp): one isolated MCPal ledger per demo key.
+// Hosted remote MCP (https://mcpal.app/mcp): one isolated MCPal ledger per demo key.
 // State (refs, spend, approvals, hash-chained decision log, ledger id, install id) lives in a
 // private Vercel Blob per key, so idempotency and policy hold across serverless invocations.
 // Writes for one key are serialized with a lock blob; reads bypass the CDN cache.
@@ -11,7 +11,7 @@ import { DecisionLog, Ledger, PayPalAuthError, PayPalClient, PayPalError, create
 import type { SpendRow } from "./session";
 import { CARD_COUNTRY_HINT, SANDBOX_API, decryptSecret, encryptSecret, secretsKey, type ByoCreds, type StoredCreds } from "./byo";
 
-export const SITE_URL = (process.env.MCPAL_SITE_URL ?? "https://mcpal.vercel.app").replace(/\/$/, "");
+export const SITE_URL = (process.env.MCPAL_SITE_URL ?? "https://mcpal.app").replace(/\/$/, "");
 export const KEY_CALLS_PER_HOUR = 30;
 export const IP_CALLS_PER_HOUR = 60;
 export const REMOTE_AMOUNT_CAP = 500;

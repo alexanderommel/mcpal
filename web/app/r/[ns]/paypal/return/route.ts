@@ -9,7 +9,7 @@ export const maxDuration = 60;
 
 const page = (msg: string) =>
   new Response(
-    `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MCPal</title><style>body{font:17px/1.5 system-ui,sans-serif;max-width:560px;margin:48px auto;padding:0 16px;color:#1b1a17;background:#f6f1e7}a{color:#c8401f}</style></head><body><h1>MCPal</h1><p>${msg.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)}</p><p><a href="/">mcpal.vercel.app</a></p></body></html>`,
+    `<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>MCPal</title><style>body{font:17px/1.5 system-ui,sans-serif;max-width:560px;margin:48px auto;padding:0 16px;color:#1b1a17;background:#f6f1e7}a{color:#c8401f}</style></head><body><h1>MCPal</h1><p>${msg.replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]!)}</p><p><a href="/">mcpal.app</a></p></body></html>`,
     { headers: { "content-type": "text/html; charset=utf-8" } },
   );
 

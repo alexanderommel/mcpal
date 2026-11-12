@@ -390,7 +390,7 @@ export function Limits() {
       </li>
       <li>
         When a rule needs a human, the tool returns an approval link on
-        mcpal.vercel.app; open it in the browser that holds your key.
+        mcpal.app; open it in the browser that holds your key.
       </li>
     </ul>
   );

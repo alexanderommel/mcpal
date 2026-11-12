@@ -1,5 +1,5 @@
 // Public endpoints of the hosted MCPal demo. Shared by the landing and /install.
-export const SITE_URL = "https://mcpal.vercel.app";
+export const SITE_URL = "https://mcpal.app";
 export const MCP_BASE = `${SITE_URL}/mcp`;
 export const REPO_URL = "https://github.com/alexanderommel/mcpal";
 
