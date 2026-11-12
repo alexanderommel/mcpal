@@ -1927,3 +1927,35 @@ summary::-webkit-details-marker {
   padding-top: 0;
   margin-top: -24px;
 }
+.hero-workflow-links {
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+.shop-lede {
+  max-width: 780px;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.7;
+}
+.shop-journey {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  padding: 0;
+  margin: 32px 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.shop-journey li {
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+}
+.shop-journey li:first-child { padding-left: 0; }
+.shop-journey li:last-child { border-right: 0; }
+.shop-journey h3 { margin: 16px 0 10px; font-size: 21px; letter-spacing: -0.5px; }
+.shop-journey p { color: var(--muted); line-height: 1.65; margin: 0; }
+@media (max-width: 700px) {
+  .shop-journey { grid-template-columns: 1fr; }
+  .shop-journey li { padding: 24px 0; border-right: 0; border-bottom: 1px solid var(--line); }
+  .shop-journey li:last-child { border-bottom: 0; }
+}

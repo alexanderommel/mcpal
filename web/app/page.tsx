@@ -116,134 +116,22 @@ export default async function Home() {
               <em>made for AI agents.</em>
             </h1>
             <p className="hero-lede">
-              {verbs.length} verbs and a buyer checkout on top of PayPal&apos;s
-              APIs. Holds, payouts and subscriptions in one call each. Simple
-              to integrate, safe to retry.
+              Turn business intent into complete PayPal workflows. {verbs.length}
+              {" "}verbs for deposits, payouts and subscriptions, plus Shop checkout
+              for buyer agents. Simple to integrate, with merchant controls built in.
             </p>
             <InstallCompact />
+            <div className="section-links hero-workflow-links">
+              <a href="#recipes-h" className="text-link">Explore payment flows ↓</a>
+              <Link href="/commerce" className="text-link">Try Shop checkout ↗</Link>
+            </div>
           </div>
           <FlowInstrument />
         </div>
-        {bench &&
-        o &&
-        m &&
-        sup?.mcpal &&
-        sup.official &&
-        adv?.mcpal &&
-        adv.official ? (
-          <section
-            className="proof-strip"
-            aria-label="Measured benchmark results"
-          >
-            <div className="proof-metrics">
-              <div>
-                <strong>
-                  {sup.mcpal.passAll}
-                  <span>/{sup.mcpal.n}</span>
-                </strong>
-                <p>
-                  tasks the official toolkit can attempt
-                  <span>
-                    vs {sup.official.passAll}/{sup.official.n}
-                  </span>
-                </p>
-              </div>
-              <div>
-                <strong>{m.duplicates}</strong>
-                <p>
-                  duplicate payments<span>vs {o.duplicates}</span>
-                </p>
-              </div>
-              <div>
-                <strong>{usd(m.misMovedUsd)}</strong>
-                <p>
-                  moved wrongly<span>vs {usd(o.misMovedUsd)}</span>
-                </p>
-              </div>
-              <div>
-                <strong>
-                  {adv.mcpal.passAll}
-                  <span>/{adv.mcpal.n}</span>
-                </strong>
-                <p>
-                  prompt-injection tasks resisted
-                  <span>
-                    vs {adv.official.passAll}/{adv.official.n}
-                  </span>
-                </p>
-              </div>
-            </div>
-            <Link href="/benchmark" className="proof-method">
-              Same model ({modelName(bench)}), same {bench.tasks} tasks, graded
-              from PayPal&apos;s own records{" "}
-              <span aria-hidden="true">↗</span>
-            </Link>
-          </section>
-        ) : (
-          <div className="pending">
-            Benchmark results are not published yet.
-          </div>
-        )}
-
-        <section
-          className="landing-section architecture-section"
-          aria-labelledby="architecture-h"
-        >
-          <div className="section-heading">
-            <div>
-              <span className="section-index">01 / ARCHITECTURE</span>
-              <h2 id="architecture-h">Where MCPal sits.</h2>
-            </div>
-            <p>
-              One clear interface between what a business asks for and what
-              PayPal needs to do.
-            </p>
-          </div>
-          <ArchitectureDiagram verbs={verbs.map((v) => v.name)} />
-          <p className="diagram-caption">
-            Built on PayPal&apos;s REST APIs — the layer after PayPal&apos;s
-            Agent Toolkit.
-          </p>
-        </section>
-
-        <section
-          className="landing-section benchmark-section"
-          aria-labelledby="bench-h"
-        >
-          <div className="section-heading">
-            <div>
-              <span className="section-index">02 / EVIDENCE, NOT PROMISES</span>
-              <h2 id="bench-h">The evidence is in the payments.</h2>
-            </div>
-            <p>
-              Same model. PayPal&apos;s own records. Both the comparable task set and
-              the full suite, side by side.
-            </p>
-          </div>
-          {bench && o && m ? (
-            <>
-              <BenchmarkChart summary={bench} />
-              <p className="benchmark-caveat">
-                {m.reps} runs per task · {modelName(bench)} · Temperature 0 ·
-                Correct in every run. A bounded benchmark, not a guarantee for
-                every payment.
-              </p>
-            </>
-          ) : (
-            <div className="pending">
-              Benchmark results are not published yet.
-            </div>
-          )}
-          <Link href="/benchmark" className="text-link">
-            Method, caveats and every PayPal id{" "}
-            <span aria-hidden="true">↗</span>
-          </Link>
-        </section>
-
         <section className="landing-section" aria-labelledby="recipes-h">
           <div className="section-heading">
             <div>
-              <span className="section-index">03 / RECIPES</span>
+              <span className="section-index">01 / PAYMENT FLOWS</span>
               <h2 id="recipes-h">Payment flows your agent can finish.</h2>
             </div>
             <p>
@@ -270,10 +158,31 @@ export default async function Home() {
           </div>
         </section>
 
+        <section
+          className="landing-section architecture-section"
+          aria-labelledby="architecture-h"
+        >
+          <div className="section-heading">
+            <div>
+              <span className="section-index">02 / ARCHITECTURE</span>
+              <h2 id="architecture-h">Where MCPal sits.</h2>
+            </div>
+            <p>
+              One clear interface between what a business asks for and what
+              PayPal needs to do.
+            </p>
+          </div>
+          <ArchitectureDiagram verbs={verbs.map((v) => v.name)} />
+          <p className="diagram-caption">
+            MCPal orchestrates PayPal&apos;s REST APIs directly. Each workflow
+            shares order state, merchant rules and a verifiable decision log.
+          </p>
+        </section>
+
         <section className="landing-section" aria-labelledby="versus-h">
           <div className="section-heading">
             <div>
-              <span className="section-index">04 / LESS TO ORCHESTRATE</span>
+              <span className="section-index">03 / BUSINESS INTENTS</span>
               <h2 id="versus-h">
                 {official.count} tools. {verbs.length} verbs.
                 <br />
@@ -282,7 +191,8 @@ export default async function Home() {
             </div>
             <p>
               PayPal&apos;s Agent Toolkit exposes API calls as tools. MCPal
-              complements it with complete business intents.
+              runs complete payment workflows, keeps order state and applies
+              the merchant&apos;s rules.
             </p>
           </div>
           <div className="tool-comparison">
@@ -364,10 +274,127 @@ export default async function Home() {
           </div>
         </section>
 
+        <section className="landing-section" aria-labelledby="commerce-h">
+          <div className="section-heading">
+            <div>
+              <span className="section-index">04 / SHOP · AGENTIC COMMERCE</span>
+              <h2 id="commerce-h">Shop. From buyer intent to a PayPal order.</h2>
+            </div>
+          </div>
+          <p className="shop-lede">
+            Give buyer agents a checkout through UCP and ACP. Shop handles the
+            cart, shipping and discounts; MCPal settles the order on PayPal
+            through the same payment workflows, merchant rules and decision log.
+          </p>
+          <ol className="shop-journey" aria-label="How Shop connects a buyer agent to PayPal">
+            <li><span className="eyebrow-s">01 / BUYER AGENT</span><h3>Discover and choose.</h3><p>Find the merchant, choose products and build a cart.</p></li>
+            <li><span className="eyebrow-s">02 / SHOP · UCP / ACP</span><h3>Complete checkout.</h3><p>Calculate shipping, apply discounts and confirm the order.</p></li>
+            <li><span className="eyebrow-s">03 / MCPAL → PAYPAL</span><h3>Run the payment flow.</h3><p>Charge now, or hold funds and capture when the order ships.</p></li>
+          </ol>
+          <Link href="/commerce" className="text-link">
+            Watch a buyer agent buy coffee ↗
+          </Link>
+        </section>
+
+        {bench &&
+        o &&
+        m &&
+        sup?.mcpal &&
+        sup.official &&
+        adv?.mcpal &&
+        adv.official ? (
+          <section
+            className="proof-strip"
+            aria-label="Measured benchmark results"
+          >
+            <div className="proof-metrics">
+              <div>
+                <strong>
+                  {sup.mcpal.passAll}
+                  <span>/{sup.mcpal.n}</span>
+                </strong>
+                <p>
+                  tasks the official toolkit can attempt
+                  <span>
+                    vs {sup.official.passAll}/{sup.official.n}
+                  </span>
+                </p>
+              </div>
+              <div>
+                <strong>{m.duplicates}</strong>
+                <p>
+                  duplicate payments<span>vs {o.duplicates}</span>
+                </p>
+              </div>
+              <div>
+                <strong>{usd(m.misMovedUsd)}</strong>
+                <p>
+                  moved wrongly<span>vs {usd(o.misMovedUsd)}</span>
+                </p>
+              </div>
+              <div>
+                <strong>
+                  {adv.mcpal.passAll}
+                  <span>/{adv.mcpal.n}</span>
+                </strong>
+                <p>
+                  prompt-injection tasks resisted
+                  <span>
+                    vs {adv.official.passAll}/{adv.official.n}
+                  </span>
+                </p>
+              </div>
+            </div>
+            <Link href="/benchmark" className="proof-method">
+              Same model ({modelName(bench)}), same {bench.tasks} tasks, graded
+              from PayPal&apos;s own records{" "}
+              <span aria-hidden="true">↗</span>
+            </Link>
+          </section>
+        ) : (
+          <div className="pending">
+            Benchmark results are not published yet.
+          </div>
+        )}
+
+        <section
+          className="landing-section benchmark-section"
+          aria-labelledby="bench-h"
+        >
+          <div className="section-heading">
+            <div>
+              <span className="section-index">05 / MEASURED RESULTS</span>
+              <h2 id="bench-h">The evidence is in the payments.</h2>
+            </div>
+            <p>
+              Same model. PayPal&apos;s own records. Both the comparable task set and
+              the full suite, side by side.
+            </p>
+          </div>
+          {bench && o && m ? (
+            <>
+              <BenchmarkChart summary={bench} />
+              <p className="benchmark-caveat">
+                {m.reps} runs per task · {modelName(bench)} · Temperature 0 ·
+                Correct in every run. A bounded benchmark, not a guarantee for
+                every payment.
+              </p>
+            </>
+          ) : (
+            <div className="pending">
+              Benchmark results are not published yet.
+            </div>
+          )}
+          <Link href="/benchmark" className="text-link">
+            Method, caveats and every PayPal id{" "}
+            <span aria-hidden="true">↗</span>
+          </Link>
+        </section>
+
         <section className="landing-section" aria-labelledby="safety-h">
           <div className="section-heading">
             <div>
-              <span className="section-index">05 / GUARDRAILS</span>
+              <span className="section-index">06 / GUARDRAILS</span>
               <h2 id="safety-h">Safety, enforced in code.</h2>
             </div>
             <p>
@@ -393,7 +420,7 @@ export default async function Home() {
         >
           <div className="section-heading">
             <div>
-              <span className="section-index">06 / YOUR RULES</span>
+              <span className="section-index">07 / YOUR RULES</span>
               <h2 id="policy-h">Policy in plain English.</h2>
             </div>
             <p>
@@ -429,7 +456,7 @@ export default async function Home() {
           aria-labelledby="log-h"
         >
           <div>
-            <span className="section-index">07 / NO BLACK BOX</span>
+            <span className="section-index">08 / DECISION LOG</span>
             <h2 id="log-h">Trace every decision to its receipt.</h2>
             <p>
               Every decision, filterable, with PayPal ids — powered by AG Grid.
@@ -481,23 +508,6 @@ export default async function Home() {
           </Link>
         </section>
 
-        <section className="landing-section" aria-labelledby="commerce-h">
-          <div className="section-heading">
-            <div>
-              <span className="section-index">08 / AGENTIC COMMERCE</span>
-              <h2 id="commerce-h">Agent-ready checkout for any PayPal merchant.</h2>
-            </div>
-          </div>
-          <p>
-            Buyer agents check out through the open Universal Commerce Protocol
-            (UCP): discovery, checkout sessions, fulfillment, discounts and
-            orders. The merchant settles every order on PayPal with MCPal&apos;s
-            verbs, under the same policy, retry-safe ids and decision log.
-          </p>
-          <Link href="/commerce" className="text-link">
-            Watch a buyer agent buy coffee ↗
-          </Link>
-        </section>
 
       </main>
       <footer className="wrap product-footer">

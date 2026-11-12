@@ -25,7 +25,7 @@ const mono = IBM_Plex_Mono({
 export const metadata: Metadata = {
   title: "MCPal — PayPal for AI agents in 8 verbs",
   description:
-    "An MCP server and library that turns PayPal's API-level agent tools into 8 intent-level verbs with idempotency, holds, payouts, policy limits and a hash-chained decision log.",
+    "Complete PayPal payment workflows for AI agents: 8 business verbs, Shop checkout over UCP and ACP, shared order state and merchant controls.",
 };
 export const viewport: Viewport = { width: "device-width", initialScale: 1 };
 
