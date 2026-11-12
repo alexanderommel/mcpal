@@ -23,7 +23,7 @@ export default async function OrderPage({ params }: { params: Promise<{ id: stri
       <Nav current="commerce" />
       <main className="wrap" id="main-content">
         <div style={{ padding: "28px 0 4px" }}>
-          <div className="eyebrow">Coffee Club Supply · PayPal sandbox</div>
+          <div className="eyebrow">Coffee Club Supply · PayPal</div>
           <h1 className="page-h1">{o.label}</h1>
           <p className="small mono">
             order {o.id} · checkout {o.checkout_id}

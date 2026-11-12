@@ -44,7 +44,7 @@ export function Nav({
         href="/proof"
         aria-current={current === "proof" ? "page" : undefined}
       >
-        Sandbox proof
+        Proof
       </Link>
       <a href={GITHUB_URL}>
         GitHub <span aria-hidden="true">↗</span>
@@ -87,8 +87,14 @@ export function Nav({
   );
 }
 
-export const APIS_SENTENCE =
-  "PayPal APIs used: Orders v2 (create, authorize, capture), Payments v2 (authorization capture, void and reauthorize; capture refunds), Payouts v1, Invoicing v2, Catalog Products v1, Billing Plans and Subscriptions v1, and Notifications v1 (verify-webhook-signature), all with OAuth 2.0 client credentials.";
+/** The one environment line, shown once in the site footer on every page. */
+export const ENV_SENTENCE =
+  "Built on PayPal Orders v2, Payments v2, Payouts, Invoicing, Subscriptions and Webhooks. This hackathon demo is connected to PayPal's sandbox.";
 
-export const TRUTH_SENTENCE =
-  "Real vs simulated: every call on this site hits the real PayPal sandbox REST API and shows PayPal's own ids and debug ids. No live money moves. Card-on-file payments use PayPal's published sandbox test card (Visa 4012 0000 7777 7777); payment links and invoices wait for a sandbox buyer to pay.";
+export function SiteFooter() {
+  return (
+    <footer className="wrap site-env">
+      <p>{ENV_SENTENCE}</p>
+    </footer>
+  );
+}

@@ -4,17 +4,17 @@ PayPal for AI agents in 8 verbs. MCPal is an MCP server and a TypeScript library
 
 PayPal's official agent toolkit (`@paypal/mcp@1.8.1 --tools=all`) gives a model 28 low-level tools (PayPal's hosted server at mcp.sandbox.paypal.com lists 46 — checked 2026-11-12 — and also has no tools for holds, payouts or retry-safe keys): create an order, get an order, pay an order, create a product, create a plan, and so on. The agent has to pick the right tools, chain them in the right order and retry without paying twice. It also has no tools for authorizations (holds and deposits) or Payouts. MCPal replaces those tools with verbs that match what a business asks for. Each verb runs the whole PayPal flow behind it.
 
-- **Hosted demo (PayPal sandbox):** <!-- DEMO_URL -->https://mcpal.vercel.app<!-- /DEMO_URL -->. In the judge console at [`/judge`](https://mcpal.vercel.app/judge), an AI agent gets your request and only MCPal's tools, and every PayPal HTTP call it causes is shown with PayPal's ids and debug ids.
-- **Connect your own agent (remote MCP):** `claude mcp add --transport http mcpal "https://mcpal.vercel.app/mcp?key=<demo key>"`. Get a key and the Cursor, VS Code, claude.ai and JSON installs at [`/install`](https://mcpal.vercel.app/install). Each key is an isolated ledger on the shared PayPal sandbox account. Proof with a real MCP client and Claude Code: [`docs/remote-mcp-proof.md`](docs/remote-mcp-proof.md).
+- **Hosted demo:** <!-- DEMO_URL -->https://mcpal.vercel.app<!-- /DEMO_URL -->. In the judge console at [`/judge`](https://mcpal.vercel.app/judge), an AI agent gets your request and only MCPal's tools, and every PayPal HTTP call it causes is shown with PayPal's ids and debug ids.
+- **Connect your own agent (remote MCP):** `claude mcp add --transport http mcpal "https://mcpal.vercel.app/mcp?key=<demo key>"`. Get a key and the Cursor, VS Code, claude.ai and JSON installs at [`/install`](https://mcpal.vercel.app/install). Each key is its own isolated ledger. Proof with a real MCP client and Claude Code: [`docs/remote-mcp-proof.md`](docs/remote-mcp-proof.md).
 - **Bring your own sandbox:** on [`/install`](https://mcpal.vercel.app/install#byo), paste a PayPal **sandbox** app's Client ID and Secret and you get a demo key whose remote MCP calls run on your own sandbox account, so the orders, holds and captures show up in your sandbox dashboard. The server checks the pair against `api-m.sandbox.paypal.com`, refuses anything that also works on live, stores the secret encrypted (AES-256-GCM), never returns it, and deletes it on "Forget my credentials". Same per-key ledger, policy, limits and idempotency. `card_on_file` needs a sandbox business account in a card-enabled country (a US one works). Proof: [`docs/byo-sandbox-proof.md`](docs/byo-sandbox-proof.md).
-- **Sandbox proof:** [`docs/sandbox-proof.json`](docs/sandbox-proof.json) has every verb run against the real sandbox. The site shows it at [`/proof`](https://mcpal.vercel.app/proof).
+- **Proof:** [`docs/sandbox-proof.json`](docs/sandbox-proof.json) has every verb run against PayPal, with PayPal's ids and debug ids. The site shows it at [`/proof`](https://mcpal.vercel.app/proof).
 
-**Real vs simulated:** every call goes to the real PayPal sandbox REST API. No live money moves. Card payments use PayPal's published sandbox test card.
+**Environment:** the hosted demo runs against PayPal's sandbox, as the hackathon requires. Self-hosted, set `PAYPAL_ENV=live` with live credentials to point MCPal at api-m.paypal.com (in live, `card_on_file` is off; use `payment_link` or `invoice`).
 
 <!-- BENCH -->
 ## Benchmark
 
-Same model (gpt-4.1-mini, temperature 0), same 50 payment tasks, real PayPal sandbox, 3 runs each. Grading reads PayPal's own records, never what the agent says.
+Same model (gpt-4.1-mini, temperature 0), same 50 payment tasks, 3 runs each. Grading reads PayPal's own records, never what the agent says.
 
 | | Official PayPal MCP (`@paypal/mcp@1.8.1`) | MCPal |
 |---|---|---|
@@ -35,9 +35,9 @@ MCPal's first version scored 38 / 50 and moved $1,667 wrongly: it paid an inject
 Caveats:
 - Tasks the official toolkit cannot do at all (no card payment source, holds or payouts) count as failures, labelled "not supported". On the 30 tasks it can do, the official toolkit scores 17 and MCPal 29.
 - MCPal's only failure is `invoice-04`: MCPal cannot create a draft-only invoice.
-- 6 payout tasks have 2 valid runs instead of 3: the sandbox business account ran out of payout balance.
+- 6 payout tasks have 2 valid runs instead of 3: the business account ran out of payout balance.
 
-Method, per-category results and every sandbox id: [`bench/results/summary.md`](bench/results/summary.md) and https://mcpal.vercel.app/benchmark.
+Method, per-category results and every PayPal id: [`bench/results/summary.md`](bench/results/summary.md) and https://mcpal.vercel.app/benchmark.
 <!-- /BENCH -->
 
 ## The verbs
@@ -94,9 +94,9 @@ Eval: 15 labelled sentences (EN/ES, 6 adversarial), all graded on the whole prop
 - one row per verb call: time, verb, orderRef, amount, decision (moved, replayed, needs approval, denied), the policy rule that fired, PayPal order / authorization / capture / refund / payout ids and the debug id, the line's hash;
 - the hash chain is re-verified in your browser (same rule as `verifyDecisionLog()`), so an edited line shows as broken;
 - quick search, column filters, decision chips, group by orderRef or a per-order view, a pinned totals row (captured, paid out, refunded, on hold, stopped by policy), CSV export for your books, and the full log line with the PayPal result on click;
-- no data yet? "Load sample from the sandbox proof" fills it from `docs/sandbox-proof.json`.
+- no data yet? "Load sample from the proof run" fills it from `docs/sandbox-proof.json`.
 
-[`/benchmark`](https://mcpal.vercel.app/benchmark) uses the same grid for all 50 tasks × both toolsets: result over all runs, failure kind, wrong movements with their PayPal sandbox ids, and the grader's reason.
+[`/benchmark`](https://mcpal.vercel.app/benchmark) uses the same grid for all 50 tasks × both toolsets: result over all runs, failure kind, wrong movements with their PayPal ids, and the grader's reason.
 
 ## Agentic commerce: agent-ready checkout (UCP and ACP)
 
@@ -104,7 +104,7 @@ Eval: 15 labelled sentences (EN/ES, 6 adversarial), all graded on the whole prop
 
 - **Discovery:** `GET /.well-known/ucp` lists the REST endpoint `https://mcpal.vercel.app/ucp/v1`, the capabilities (checkout, fulfillment, discount, order) and the payment handlers.
 - **Checkout:** `POST /checkout-sessions`, then `GET` or `PUT /checkout-sessions/{id}`, then `POST .../complete` or `.../cancel`. The merchant prices everything in integer cents. The status moves from `incomplete` to `ready_for_complete` to `completed`. Problems come back as typed messages (`out_of_stock`, `not_found`, `quantity_adjusted`, `payment_failed`).
-- **Settlement through MCPal:** `complete` calls MCPal `charge` (card_on_file, PayPal's sandbox test card). With `"dev.mcpal.settlement": "authorize"` it calls `hold` instead, and the merchant later calls `POST /orders/{id}/ship` (`capture_hold`), `/release` (`void_hold`) or `/refund` (`refund`). Cancel runs `void_hold`.
+- **Settlement through MCPal:** `complete` calls MCPal `charge` (card_on_file, PayPal's published test card). With `"dev.mcpal.settlement": "authorize"` it calls `hold` instead, and the merchant later calls `POST /orders/{id}/ship` (`capture_hold`), `/release` (`void_hold`) or `/refund` (`refund`). Cancel runs `void_hold`.
 - **Retry-safe:** a UCP `Idempotency-Key` with the same body replays the first answer, and with a different body gets 409. The MCPal orderRef is derived from the checkout id, so even a complete sent with a new key can never charge twice.
 - **Policy and log:** totals at or above $250.00 stop at the merchant's approval rule. Nothing is charged, and the checkout answers `requires_escalation` with a `continue_url`. Every decision is written to the hash-chained log; see [`/ledger?source=merchant`](https://mcpal.vercel.app/ledger?source=merchant).
 - **ACP:** the same engine answers the Agentic Commerce Protocol `checkout_sessions` API (2026-04-17) at `/acp/checkout_sessions`. ACP differences are handled: update is a POST, the status names differ, an idempotency conflict returns 422, and the request carries `payment_data`.
@@ -122,7 +122,7 @@ Eval: 15 labelled sentences (EN/ES, 6 adversarial), all graded on the whole prop
 - the UCP MCP and A2A transports
 - ACP delegated payment
 
-On the sandbox, every accepted instrument settles with PayPal's published sandbox test card. Card numbers sent by agents are never forwarded.
+Every accepted instrument settles with PayPal's published test card. Card numbers sent by agents are never forwarded.
 
 ## Prompt injection: what the code enforces and what it cannot
 
@@ -144,7 +144,7 @@ What code cannot verify:
 
 ## Run it
 
-Requires Node 22 and PayPal sandbox REST credentials from developer.paypal.com.
+Requires Node 22 and PayPal REST credentials from developer.paypal.com.
 
 ```bash
 git clone https://github.com/alexanderommel/mcpal.git && cd mcpal
@@ -196,9 +196,9 @@ npm run test:sandbox   # the real sandbox; skipped without credentials
 ## Repository layout
 
 - `src/`: the library and the MCP server (`server.ts`), with the verbs in `src/verbs/`, the REST client in `src/paypal/`, the ledger and decision log in `src/ledger/` and webhook verification in `src/webhooks/`.
-- `bench/`: the benchmark. The same model gets the same tasks, once with the official toolkit and once with MCPal, and the grader checks the resulting PayPal sandbox state.
-- `web/`: the Next.js site with the landing page, the judge console, the benchmark page and the sandbox proof. See [`docs/PUBLISH.md`](docs/PUBLISH.md) for the deploy.
-- `docs/`: the official tool list as measured, and the sandbox proof.
+- `bench/`: the benchmark. The same model gets the same tasks, once with the official toolkit and once with MCPal, and the grader checks the resulting PayPal state.
+- `web/`: the Next.js site with the landing page, the judge console, the benchmark page and the proof page. See [`docs/PUBLISH.md`](docs/PUBLISH.md) for the deploy.
+- `docs/`: the official tool list as measured, and the proof run.
 
 ## License
 

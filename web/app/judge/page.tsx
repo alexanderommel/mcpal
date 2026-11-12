@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { JudgeConsole } from "@/components/JudgeConsole";
-import { APIS_SENTENCE, Nav, TRUTH_SENTENCE } from "@/components/Nav";
+import { Nav } from "@/components/Nav";
 import { AMOUNT_CAP, JUDGE_POLICY, MODEL, PRESETS } from "@/lib/agent";
 import { RUNS_PER_HOUR } from "@/lib/ratelimit";
 
@@ -18,15 +18,11 @@ export default function JudgePage() {
         <div style={{ paddingTop: 28 }}>
           <div className="eyebrow">Judge console</div>
           <p className="lede" style={{ margin: "8px 0 12px" }}>
-            An AI agent ({MODEL}, temperature 0) gets your request and only MCPal&apos;s tools. Each tool call runs the real MCPal server, which calls the PayPal
-            sandbox. Policy for this demo: a human approves anything over ${JUDGE_POLICY.approval_threshold} and every payout to a recipient never paid before (the
+            An AI agent ({MODEL}, temperature 0) gets your request and only MCPal&apos;s tools. Each tool call runs the real MCPal server, which calls
+            PayPal. Policy for this demo: a human approves anything over ${JUDGE_POLICY.approval_threshold} and every payout to a recipient never paid before (the
             regular courier is pre-approved); daily cap $
             {JUDGE_POLICY.daily_cap}; refunds above ${JUDGE_POLICY.refund_ceiling} need approval.
           </p>
-          <div className="truth" style={{ marginTop: 0 }}>
-            <p>{TRUTH_SENTENCE}</p>
-            <p className="apis">{APIS_SENTENCE}</p>
-          </div>
         </div>
         <JudgeConsole presets={PRESETS} runsPerHour={RUNS_PER_HOUR} amountCap={AMOUNT_CAP} />
       </main>

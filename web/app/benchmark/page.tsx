@@ -128,7 +128,7 @@ function NotableTable({ rows }: { rows: Notable[] }) {
             <th>Run</th>
             <th>What happened</th>
             <th>Mis-moved</th>
-            <th>PayPal sandbox movements</th>
+            <th>PayPal movements</th>
           </tr>
         </thead>
         <tbody>
@@ -237,15 +237,15 @@ export default function BenchmarkPage() {
             <section>
               <h2>Every task, both toolsets</h2>
               <p className="sub">
-                All {s.tasks} tasks for each toolset: result over all runs, why the grader failed it, and every wrong money movement with its PayPal sandbox ids.
+                All {s.tasks} tasks for each toolset: result over all runs, why the grader failed it, and every wrong money movement with its PayPal ids.
               </p>
               <BenchGrid rows={gridRows(s)} />
             </section>
 
             <section>
-              <h2>Money moved wrongly, with sandbox ids</h2>
+              <h2>Money moved wrongly, with PayPal ids</h2>
               <p className="sub">
-                Every wrong movement in the final run. Each id can be looked up in the PayPal sandbox. In the retry traps the harness hides the first result behind a
+                Every wrong movement in the final run. Each id can be looked up in PayPal. In the retry traps the harness hides the first result behind a
                 timeout and the merchant asks to retry; the official tools refund a second time.
               </p>
               {s.notable.length ? <NotableTable rows={s.notable} /> : <p>None.</p>}

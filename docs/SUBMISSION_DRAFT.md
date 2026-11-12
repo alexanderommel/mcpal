@@ -4,7 +4,7 @@
 
 **Name:** MCPal
 
-**Tagline (≤200 chars):** Give your AI agent PayPal, safely. One MCP line adds 8 verbs on top of PayPal's APIs. Same model, real sandbox: 29/30 tasks vs 17/30 with the official tools, and no payment made twice.
+**Tagline (≤200 chars):** Give your AI agent PayPal, safely. One MCP line adds 8 verbs on top of PayPal's APIs. Same model, same 50 tasks: 29/30 vs 17/30 with the official tools, and no payment made twice.
 
 ---
 
@@ -41,7 +41,7 @@ We re-implemented the checks of the official UCP conformance modules from their 
 **Official UCP conformance suite** (Google's, run against our live endpoints): 78 tests — 55 passed, 14 failed, 9 skipped. All 14 failures are the three features the demo merchant doesn't implement (order webhooks, platform-written order updates, shipping simulation); checkout, idempotency, totals, discounts, validation and card credentials all pass.
 
 ## How we measured it
-Same model (gpt-4.1-mini, temperature 0), same 50 merchant payment tasks, real PayPal sandbox, 3 runs each, graded from PayPal's records.
+Same model (gpt-4.1-mini, temperature 0), same 50 merchant payment tasks, 3 runs each, graded from PayPal's own records.
 
 | | Official PayPal MCP (28 tools) | MCPal (8 verbs) |
 |---|---|---|

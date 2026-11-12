@@ -232,7 +232,7 @@ export function JudgeConsole({ presets, runsPerHour, amountCap }: { presets: Pre
           </form>
           <p className="small">
             {runsPerHour} runs per hour per visitor{typeof runsLeft === "number" ? ` · ${runsLeft} left` : ""}. Amounts above ${amountCap}, non-USD and payouts to
-            non-sandbox addresses are refused before PayPal is called.
+            addresses outside example.com are refused before PayPal is called.
           </p>
         </div>
 
@@ -296,7 +296,7 @@ export function JudgeConsole({ presets, runsPerHour, amountCap }: { presets: Pre
       </aside>
 
       <div className="feed" aria-live="polite">
-        {runs.length === 0 && <div className="empty">Pick a request on the left. The agent&apos;s tool calls and every PayPal sandbox HTTP call appear here as they happen.</div>}
+        {runs.length === 0 && <div className="empty">Pick a request on the left. The agent&apos;s tool calls and every PayPal HTTP call appear here as they happen.</div>}
         {runs.map((r) => (
           <RunCard key={r.key} run={r} busy={busy} onRetry={() => r.message && start({ text: r.message, runKey: r.runKey, retry: true })} />
         ))}

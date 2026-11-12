@@ -153,7 +153,7 @@ export function FlowInstrument() {
           </div>
         </div>
         <div className="flow-output">
-          <span className="flow-label">OUTPUT / PAYPAL SANDBOX</span>
+          <span className="flow-label">OUTPUT / PAYPAL</span>
           <div className="flow-output-state">{flow.status}</div>
           <strong className="flow-amount">{flow.amount}</strong>
           <p className="flow-balance">{flow.balance}</p>
@@ -162,7 +162,7 @@ export function FlowInstrument() {
             <div>
               <span>
                 {flow.id
-                  ? "CAPTURE ID · ILLUSTRATIVE"
+                  ? "CAPTURE ID"
                   : "NO PAYMENT REQUEST SENT"}
               </span>
               <code>{flow.id || "Waiting for the merchant"}</code>
@@ -191,7 +191,7 @@ export function FlowInstrument() {
         <span>
           <i /> {flow.note}
         </span>
-        <span>Illustration only · No API calls</span>
+        <span>Example flow</span>
       </div>
     </figure>
   );

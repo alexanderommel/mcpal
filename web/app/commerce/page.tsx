@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 import Link from "next/link";
-import { GITHUB_URL, Nav, TRUTH_SENTENCE } from "@/components/Nav";
+import { GITHUB_URL, Nav } from "@/components/Nav";
 import { BuyerAgentRun, Transcript } from "@/components/BuyerAgentRun";
 import { DISCOUNTS, PRODUCTS, SHIPPING_OPTIONS, INTL_OPTIONS } from "@/lib/commerce/catalog";
 import { SITE_URL } from "@/lib/site";
@@ -52,7 +52,7 @@ curl -s -X POST ${ep}/checkout-sessions \\
          "address_region":"CA","postal_code":"95131","address_country":"US"}],
          "groups":[{"selected_option_id":"std-ground"}]}]}}'
 
-# then, with the returned id (PayPal sandbox; nothing real moves):
+# then, with the returned id:
 curl -s -X POST ${ep}/checkout-sessions/<id>/complete \\
   -H 'UCP-Agent: profile="https://agent.example/profile"' \\
   -H "Idempotency-Key: $(uuidgen)" -H 'content-type: application/json' \\
@@ -64,7 +64,7 @@ curl -s -X POST ${ep}/checkout-sessions/<id>/complete \\
       <Nav current="commerce" />
       <main className="wrap" id="main-content">
         <div style={{ padding: "28px 0 4px" }}>
-          <div className="eyebrow">Agentic commerce · UCP {"2026-04-08"} · PayPal sandbox</div>
+          <div className="eyebrow">Agentic commerce · UCP {"2026-04-08"} · PayPal</div>
           <h1 className="page-h1">Agent-ready checkout for any PayPal merchant</h1>
           <p className="lede">
             Shopping agents are starting to buy on people&apos;s behalf through the open <a href="https://ucp.dev">Universal Commerce Protocol</a>. MCPal gives a PayPal
@@ -262,7 +262,7 @@ curl -s -X POST ${ep}/checkout-sessions/<id>/complete \\
             Discount codes: {DISCOUNTS.map((d) => d.code).join(", ")} (AGENT10 is the one the profile advertises). Hosted-demo cap: $500.00 per checkout.
           </p>
           <p className="small" id="terms">
-            Terms: this is a demo merchant on the PayPal sandbox. Nothing ships and no real money moves.
+            Terms: this is a demo merchant. Nothing ships.
           </p>
           <p className="small" id="privacy">
             Privacy: buyer names, emails and addresses sent to the demo are stored with the checkout session in private storage and used only to render it.
@@ -274,18 +274,15 @@ curl -s -X POST ${ep}/checkout-sessions/<id>/complete \\
           <ul className="small" style={{ maxWidth: "75ch" }}>
             <li>Order webhooks to the platform, request/response signatures (RFC 9421) and the conformance suite&apos;s simulate-shipping hook.</li>
             <li>Platform-written order updates (<code>PUT /orders/&#123;id&#125;</code>), stored customer address books, AP2 mandates, verified token binding.</li>
-            <li>Real card or wallet credentials: on the sandbox, every accepted instrument settles with PayPal&apos;s published sandbox test card. Card numbers are never forwarded.</li>
+            <li>Real card or wallet credentials: every accepted instrument settles with PayPal&apos;s published test card. Card numbers are never forwarded.</li>
             <li>MCP and A2A transports for UCP; the REST binding only.</li>
-            <li>ACP: delegated payment (the PSP vault-token flow), order webhooks to the agent platform and signed requests. The ACP endpoints share the UCP engine, so the same sandbox handler settles them.</li>
+            <li>ACP: delegated payment (the PSP vault-token flow), order webhooks to the agent platform and signed requests. The ACP endpoints share the UCP engine, so the same handler settles them.</li>
           </ul>
           <p className="small">
             Every merchant decision is in the <Link href="/ledger?source=merchant">decision log</Link> (source &ldquo;merchant checkout (UCP)&rdquo;).
           </p>
         </section>
 
-        <div className="truth">
-          <p>{TRUTH_SENTENCE}</p>
-        </div>
       </main>
     </>
   );

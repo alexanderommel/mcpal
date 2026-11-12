@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Nav, TRUTH_SENTENCE } from "@/components/Nav";
+import { Nav } from "@/components/Nav";
 import { Install, Limits } from "@/components/Install";
 import { ByoSandbox } from "@/components/ByoSandbox";
 import { MCP_BASE } from "@/lib/site";
@@ -25,7 +25,7 @@ export default function InstallPage() {
         </h1>
         <p className="lede">
           Pick a client. Copy one snippet. Your demo key is already included,
-          with an isolated ledger on the PayPal sandbox.
+          with its own isolated ledger.
         </p>
         <Install />
         <div className="install-byo-frame">
@@ -33,9 +33,6 @@ export default function InstallPage() {
         </div>
         <h2 className="h-sm">Demo limits</h2>
         <Limits />
-        <div className="truth">
-          <p>{TRUTH_SENTENCE}</p>
-        </div>
       </main>
     </>
   );

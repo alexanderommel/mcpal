@@ -1249,23 +1249,6 @@ summary::-webkit-details-marker {
 .log-preview-bottom > span {
   margin-left: auto;
 }
-.truth-section > p {
-  font-size: 12px;
-  line-height: 1.9;
-  max-width: 70ch;
-  color: var(--muted);
-  margin: 24px 0;
-}
-.truth-illustrative {
-  font-size: 11px !important;
-}
-.api-disclosure p {
-  font:
-    10px/1.9 var(--font-mono),
-    monospace;
-  color: var(--muted);
-  max-width: 85ch;
-}
 .product-footer {
   display: flex;
   gap: 24px;
@@ -1925,4 +1908,22 @@ summary::-webkit-details-marker {
   .flow-body {
     opacity: 1;
   }
+}
+
+.site-env {
+  border-top: 1px solid var(--line);
+  padding-top: 16px;
+  padding-bottom: 28px;
+}
+.site-env p {
+  margin: 0;
+  max-width: 85ch;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--muted);
+}
+.product-footer + .site-env {
+  border-top: 0;
+  padding-top: 0;
+  margin-top: -24px;
 }

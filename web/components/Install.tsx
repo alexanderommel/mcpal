@@ -57,7 +57,7 @@ function KeyLine({ k }: { k: string }) {
   return (
     <p className="small keyline">
       Your demo key: <code>{k || "…"}</code> (kept in this browser; it is your
-      own sandbox ledger).{" "}
+      own ledger).{" "}
       <button type="button" className="linkish" onClick={resetDemoKey}>
         New key
       </button>
@@ -98,7 +98,7 @@ export function InstallCompact() {
         Try it in the judge console <span aria-hidden="true">→</span>
       </Link>
       <details className="compact-session">
-        <summary>Your sandbox session</summary>
+        <summary>Your session</summary>
         <KeyLine k={k} />
       </details>
     </div>
@@ -324,7 +324,7 @@ PAYPAL_CLIENT_ID=... PAYPAL_CLIENT_SECRET=... node dist/server.js --http   # Str
         {tab === "Local from source" && (
           <>
             <p>
-              Run MCPal yourself with your own PayPal sandbox app
+              Run MCPal yourself with your own PayPal app credentials
               (developer.paypal.com). Node 22.
             </p>
             <CodeBox code={local} />
@@ -370,8 +370,7 @@ export function Limits() {
   return (
     <ul className="limits">
       <li>
-        PayPal <b>sandbox</b> only; no live money moves. Bring your own sandbox
-        app above, or use the shared one.
+        Bring your own PayPal sandbox app above, or use the shared one.
       </li>
       <li>
         Each demo key is its own isolated ledger, idempotency scope and
@@ -387,8 +386,7 @@ export function Limits() {
         sandbox&rdquo;.
       </li>
       <li>
-        <code>card_on_file</code> charges PayPal&apos;s published sandbox test
-        card.
+        <code>card_on_file</code> charges PayPal&apos;s published test card.
       </li>
       <li>
         When a rule needs a human, the tool returns an approval link on

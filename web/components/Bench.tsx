@@ -29,7 +29,7 @@ export function BenchHeadline({ s, full = false }: { s: BenchSummary; full?: boo
   return (
     <>
       <p className="lede" style={{ fontSize: 17 }}>
-        Same model ({modelName(s)}, temperature 0), same {s.tasks} payment tasks, real PayPal sandbox, {m.reps} runs each. Graded from PayPal&apos;s own records, never
+        Same model ({modelName(s)}, temperature 0), same {s.tasks} payment tasks, {m.reps} runs each. Graded from PayPal&apos;s own records, never
         from what the agent says.
       </p>
       <div className="bench">
@@ -67,7 +67,7 @@ export function BenchHeadline({ s, full = false }: { s: BenchSummary; full?: boo
         )}
         {short.length > 0 && (
           <li>
-            {short.length} payout tasks have {short[0]!.runs} valid runs instead of {m.reps}: the sandbox business account ran out of payout balance. Their result is
+            {short.length} payout tasks have {short[0]!.runs} valid runs instead of {m.reps}: the business account ran out of payout balance. Their result is
             computed over the valid runs.
           </li>
         )}
@@ -75,7 +75,7 @@ export function BenchHeadline({ s, full = false }: { s: BenchSummary; full?: boo
       {!full && (
         <p>
           <Link className="btn ghost" href="/benchmark">
-            Method, per-category results and sandbox ids
+            Method, per-category results and PayPal ids
           </Link>
         </p>
       )}

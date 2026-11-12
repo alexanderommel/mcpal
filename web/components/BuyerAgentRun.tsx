@@ -90,7 +90,7 @@ export function BuyerAgentRun() {
         <button className="btn" onClick={() => void go()} disabled={busy}>
           {busy ? "Buyer agent is shopping… (about 20 s)" : "Run the buyer agent live"}
         </button>
-        <span className="small">gpt-4.1-mini · real PayPal sandbox · 3 runs per hour</span>
+        <span className="small">gpt-4.1-mini · PayPal · 3 runs per hour</span>
       </div>
       {error ? <p className="small" style={{ color: "var(--accent)" }}>{error}</p> : null}
       {run ? <Transcript run={run} /> : null}

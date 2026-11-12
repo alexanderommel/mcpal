@@ -1,11 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import {
-  APIS_SENTENCE,
-  GITHUB_URL,
-  Nav,
-  TRUTH_SENTENCE,
-} from "@/components/Nav";
+import { GITHUB_URL, Nav } from "@/components/Nav";
 import { FlowInstrument } from "@/components/FlowInstrument";
 import { modelName } from "@/components/Bench";
 import { CodeBox, InstallCompact } from "@/components/Install";
@@ -113,7 +108,7 @@ export default async function Home() {
         <div className="product-hero technical-hero">
           <div className="hero-copy">
             <div className="eyebrow">
-              Remote MCP server · PayPal REST APIs · Sandbox
+              Remote MCP server · PayPal REST APIs
             </div>
             <h1>
               Give your AI agent PayPal.
@@ -178,8 +173,8 @@ export default async function Home() {
               </div>
             </div>
             <Link href="/benchmark" className="proof-method">
-              Same model ({modelName(bench)}), same {bench.tasks} tasks, real
-              PayPal sandbox, graded from PayPal&apos;s records{" "}
+              Same model ({modelName(bench)}), same {bench.tasks} tasks, graded
+              from PayPal&apos;s own records{" "}
               <span aria-hidden="true">↗</span>
             </Link>
           </section>
@@ -220,7 +215,7 @@ export default async function Home() {
               <h2 id="bench-h">The evidence is in the payments.</h2>
             </div>
             <p>
-              Same model. Real sandbox records. Both the comparable task set and
+              Same model. PayPal&apos;s own records. Both the comparable task set and
               the full suite, side by side.
             </p>
           </div>
@@ -239,7 +234,7 @@ export default async function Home() {
             </div>
           )}
           <Link href="/benchmark" className="text-link">
-            Method, caveats and every sandbox id{" "}
+            Method, caveats and every PayPal id{" "}
             <span aria-hidden="true">↗</span>
           </Link>
         </section>
@@ -454,7 +449,7 @@ export default async function Home() {
               <span className="small">AG Grid</span>
             </div>
             <div className="log-example-label">
-              Illustrative view · Open for real records
+              Example view
             </div>
             <div className="log-preview-table">
               <div className="log-table-head">
@@ -499,29 +494,10 @@ export default async function Home() {
             verbs, under the same policy, retry-safe ids and decision log.
           </p>
           <Link href="/commerce" className="text-link">
-            Watch a buyer agent buy coffee on the PayPal sandbox ↗
+            Watch a buyer agent buy coffee ↗
           </Link>
         </section>
 
-        <section
-          className="landing-section truth-section"
-          aria-labelledby="truth-h"
-        >
-          <span className="section-index">09 / THE FINE PRINT, UP FRONT</span>
-          <h2 id="truth-h">What&apos;s real.</h2>
-          <p>{TRUTH_SENTENCE}</p>
-          <p className="truth-illustrative">
-            The interactive payment examples and decision-log preview use
-            illustrative IDs. Open the judge console, ledger or sandbox proof
-            for real records.
-          </p>
-          <details className="api-disclosure">
-            <summary>
-              Built on PayPal REST APIs <span aria-hidden="true">+</span>
-            </summary>
-            <p>{APIS_SENTENCE}</p>
-          </details>
-        </section>
       </main>
       <footer className="wrap product-footer">
         <Link href="/" className="brand">

@@ -272,7 +272,7 @@ export function LedgerExplorer({ proof }: { proof: Proof }) {
             {s}: {c!.count} entries, hash chain {c!.ok ? "verified in your browser" : `BROKEN at line ${c!.brokenAt} (${c!.reason})`}
           </span>
         ))}
-        {hasSample && <span className="pill neutral">sample: real sandbox results from docs/sandbox-proof.json (run {proof.run}), not a hash-chained log</span>}
+        {hasSample && <span className="pill neutral">sample: PayPal results from docs/sandbox-proof.json (run {proof.run}), not a hash-chained log</span>}
       </div>
 
       {status && !loading && (
@@ -280,7 +280,7 @@ export function LedgerExplorer({ proof }: { proof: Proof }) {
           {hasSample && !rows.some((r) => r.source !== "sample (sandbox proof)") ? "No decisions yet for this browser, so the grid shows the sample. Your own runs appear here after you use the judge console or the remote MCP." : status}{" "}
           {!hasSample && (
             <button className="btn small" onClick={loadSample} style={{ marginLeft: 8 }}>
-              Load sample from the sandbox proof
+              Load sample from the proof run
             </button>
           )}{" "}
           <Link href="/judge" className="btn ghost small">
@@ -412,7 +412,7 @@ export function LedgerExplorer({ proof }: { proof: Proof }) {
           )}
           <p className="small" style={{ margin: "4px 0 8px" }}>
             {selected.chain === "sample"
-              ? "Sample row from the sandbox proof script: the raw MCPal result as PayPal returned it."
+              ? "Sample row from the proof script: the raw MCPal result as PayPal returned it."
               : `Log line #${selected.seq} · hash ${selected.hash} · chain ${selected.chain}. Below: the log line exactly as stored, including the PayPal result (ids, debug id, state).`}
           </p>
           <pre className="ledger-json">{JSON.stringify(selected.raw, null, 2)}</pre>

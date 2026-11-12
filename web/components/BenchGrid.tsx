@@ -47,7 +47,7 @@ export function BenchGrid({ rows }: { rows: BenchGridRow[] }) {
       { field: "failureKind", headerName: "Failure kind", width: 140, filter: "agTextColumnFilter", valueFormatter: (p) => String(p.value ?? "").replace(/_/g, " ") },
       { field: "wrongMovements", headerName: "Wrong movements", width: 145, type: "numericColumn", filter: "agNumberColumnFilter" },
       { field: "misMovedUsd", headerName: "US$ moved wrongly", width: 150, type: "numericColumn", valueFormatter: (p) => (p.value ? `$${Number(p.value).toFixed(2)}` : "") },
-      { field: "sandboxIds", headerName: "PayPal sandbox movements", width: 340, cellClass: "mono", tooltipField: "sandboxIds" },
+      { field: "sandboxIds", headerName: "PayPal movements", width: 340, cellClass: "mono", tooltipField: "sandboxIds" },
       { field: "reason", headerName: "Grader reason", width: 320, tooltipField: "reason", filter: "agTextColumnFilter" },
       { field: "prompt", headerName: "Merchant request", width: 420, tooltipField: "prompt" },
     ],
@@ -62,7 +62,7 @@ export function BenchGrid({ rows }: { rows: BenchGridRow[] }) {
   return (
     <div className="bgrid">
       <div className="ledger-bar">
-        <input className="ledger-q" type="search" placeholder="Search tasks, reasons, sandbox ids…" value={quick} onChange={(e) => setQuick(e.target.value)} aria-label="Quick filter" />
+        <input className="ledger-q" type="search" placeholder="Search tasks, reasons, PayPal ids…" value={quick} onChange={(e) => setQuick(e.target.value)} aria-label="Quick filter" />
         <div className="ledger-seg" role="tablist" aria-label="Toolset">
           {(["both", "Official PayPal MCP", "MCPal"] as const).map((x) => (
             <button key={x} role="tab" aria-selected={toolset === x} onClick={() => setToolset(x)}>
