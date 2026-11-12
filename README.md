@@ -4,10 +4,10 @@
 
 PayPal's official agent toolkit (`@paypal/mcp@1.8.1 --tools=all`) gives a model 28 low-level tools (PayPal's hosted server at mcp.sandbox.paypal.com lists 46 — checked 2026-11-12 — and also has no tools for holds, payouts or retry-safe keys): create an order, get an order, pay an order, create a product, create a plan, and so on. The agent has to pick the right tools, chain them in the right order and retry without paying twice. It also has no tools for authorizations (holds and deposits) or Payouts. MCPal replaces those tools with verbs that match what a business asks for. Each verb runs the whole PayPal flow behind it.
 
-- **Hosted demo:** <!-- DEMO_URL -->https://mcpal.vercel.app<!-- /DEMO_URL -->. In the judge console at [`/judge`](https://mcpal.vercel.app/judge), an AI agent gets your request and only MCPal's tools, and every PayPal HTTP call it causes is shown with PayPal's ids and debug ids.
-- **Connect your own agent (remote MCP):** `claude mcp add --transport http mcpal "https://mcpal.vercel.app/mcp?key=<demo key>"`. Get a key and the Cursor, VS Code, claude.ai and JSON installs at [`/install`](https://mcpal.vercel.app/install). Each key is its own isolated ledger. Proof with a real MCP client and Claude Code: [`docs/remote-mcp-proof.md`](docs/remote-mcp-proof.md).
-- **Bring your own sandbox:** on [`/install`](https://mcpal.vercel.app/install#byo), paste a PayPal **sandbox** app's Client ID and Secret and you get a demo key whose remote MCP calls run on your own sandbox account, so the orders, holds and captures show up in your sandbox dashboard. The server checks the pair against `api-m.sandbox.paypal.com`, refuses anything that also works on live, stores the secret encrypted (AES-256-GCM), never returns it, and deletes it on "Forget my credentials". Same per-key ledger, policy, limits and idempotency. `card_on_file` needs a sandbox business account in a card-enabled country (a US one works). Proof: [`docs/byo-sandbox-proof.md`](docs/byo-sandbox-proof.md).
-- **Proof:** [`docs/sandbox-proof.json`](docs/sandbox-proof.json) has every verb run against PayPal, with PayPal's ids and debug ids. The site shows it at [`/proof`](https://mcpal.vercel.app/proof).
+- **Hosted demo:** <!-- DEMO_URL -->https://mcpal.app<!-- /DEMO_URL -->. In the judge console at [`/judge`](https://mcpal.app/judge), an AI agent gets your request and only MCPal's tools, and every PayPal HTTP call it causes is shown with PayPal's ids and debug ids.
+- **Connect your own agent (remote MCP):** `claude mcp add --transport http mcpal "https://mcpal.app/mcp?key=<demo key>"`. Get a key and the Cursor, VS Code, claude.ai and JSON installs at [`/install`](https://mcpal.app/install). Each key is its own isolated ledger. Proof with a real MCP client and Claude Code: [`docs/remote-mcp-proof.md`](docs/remote-mcp-proof.md).
+- **Bring your own sandbox:** on [`/install`](https://mcpal.app/install#byo), paste a PayPal **sandbox** app's Client ID and Secret and you get a demo key whose remote MCP calls run on your own sandbox account, so the orders, holds and captures show up in your sandbox dashboard. The server checks the pair against `api-m.sandbox.paypal.com`, refuses anything that also works on live, stores the secret encrypted (AES-256-GCM), never returns it, and deletes it on "Forget my credentials". Same per-key ledger, policy, limits and idempotency. `card_on_file` needs a sandbox business account in a card-enabled country (a US one works). Proof: [`docs/byo-sandbox-proof.md`](docs/byo-sandbox-proof.md).
+- **Proof:** [`docs/sandbox-proof.json`](docs/sandbox-proof.json) has every verb run against PayPal, with PayPal's ids and debug ids. The site shows it at [`/proof`](https://mcpal.app/proof).
 
 **Environment:** the hosted demo runs against PayPal's sandbox, as the hackathon requires. Self-hosted, set `PAYPAL_ENV=live` with live credentials to point MCPal at api-m.paypal.com (in live, `card_on_file` is off; use `payment_link` or `invoice`).
 
@@ -37,7 +37,7 @@ Caveats:
 - MCPal's only failure is `invoice-04`: MCPal cannot create a draft-only invoice.
 - 6 payout tasks have 2 valid runs instead of 3: the business account ran out of payout balance.
 
-Method, per-category results and every PayPal id: [`bench/results/summary.md`](bench/results/summary.md) and https://mcpal.vercel.app/benchmark.
+Method, per-category results and every PayPal id: [`bench/results/summary.md`](bench/results/summary.md) and https://mcpal.app/benchmark.
 <!-- /BENCH -->
 
 ## The verbs
@@ -83,33 +83,33 @@ The model only proposes. Deterministic code decides what is kept:
 
 **The agent can't edit its own rules.** There is no MCP tool for the policy. The 8 verbs are the agent's whole tool list, and a unit test checks that none of them touches the policy.
 
-Try it at [`/policy`](https://mcpal.vercel.app/policy). After you compile, "Try it" runs refund, payout and charge checks through the same `checkRules()` code the MCP server uses, without calling PayPal.
+Try it at [`/policy`](https://mcpal.app/policy). After you compile, "Try it" runs refund, payout and charge checks through the same `checkRules()` code the MCP server uses, without calling PayPal.
 
 Eval: 15 labelled sentences (EN/ES, 6 adversarial), all graded on the whole proposed policy. The first run scored 14 / 15, and all 6 adversarial cases came out unchanged. The one miss was a euro amount: the model corrupted the `€` sign when quoting, so the guard safely dropped that rule. After a fix aimed at that case, the final run scored 15 / 15. Details and the honest caveats: [`docs/policy-ai-eval.md`](docs/policy-ai-eval.md).
 
 ## Decision log explorer (AG Grid)
 
-[`/ledger`](https://mcpal.vercel.app/ledger) shows every MCPal decision for your demo key (the hosted remote MCP) and your judge-console session in an [AG Grid](https://www.ag-grid.com/) Community grid (MIT, `ag-grid-react` 36.2.0):
+[`/ledger`](https://mcpal.app/ledger) shows every MCPal decision for your demo key (the hosted remote MCP) and your judge-console session in an [AG Grid](https://www.ag-grid.com/) Community grid (MIT, `ag-grid-react` 36.2.0):
 
 - one row per verb call: time, verb, orderRef, amount, decision (moved, replayed, needs approval, denied), the policy rule that fired, PayPal order / authorization / capture / refund / payout ids and the debug id, the line's hash;
 - the hash chain is re-verified in your browser (same rule as `verifyDecisionLog()`), so an edited line shows as broken;
 - quick search, column filters, decision chips, group by orderRef or a per-order view, a pinned totals row (captured, paid out, refunded, on hold, stopped by policy), CSV export for your books, and the full log line with the PayPal result on click;
 - no data yet? "Load sample from the proof run" fills it from `docs/sandbox-proof.json`.
 
-[`/benchmark`](https://mcpal.vercel.app/benchmark) uses the same grid for all 50 tasks × both toolsets: result over all runs, failure kind, wrong movements with their PayPal ids, and the grader's reason.
+[`/benchmark`](https://mcpal.app/benchmark) uses the same grid for all 50 tasks × both toolsets: result over all runs, failure kind, wrong movements with their PayPal ids, and the grader's reason.
 
 ## Agentic commerce: agent-ready checkout (UCP and ACP)
 
-[`/commerce`](https://mcpal.vercel.app/commerce) makes a PayPal merchant "agent-ready". Buyer agents check out through the open [Universal Commerce Protocol](https://ucp.dev) (UCP 2026-04-08, REST binding), and the merchant settles every order on PayPal with MCPal's verbs. The demo merchant is **Coffee Club Supply**: 5 products plus one sold-out item, USD, US and international shipping options, discount code `AGENT10`.
+[`/commerce`](https://mcpal.app/commerce) makes a PayPal merchant "agent-ready". Buyer agents check out through the open [Universal Commerce Protocol](https://ucp.dev) (UCP 2026-04-08, REST binding), and the merchant settles every order on PayPal with MCPal's verbs. The demo merchant is **Coffee Club Supply**: 5 products plus one sold-out item, USD, US and international shipping options, discount code `AGENT10`.
 
-- **Discovery:** `GET /.well-known/ucp` lists the REST endpoint `https://mcpal.vercel.app/ucp/v1`, the capabilities (checkout, fulfillment, discount, order) and the payment handlers.
+- **Discovery:** `GET /.well-known/ucp` lists the REST endpoint `https://mcpal.app/ucp/v1`, the capabilities (checkout, fulfillment, discount, order) and the payment handlers.
 - **Checkout:** `POST /checkout-sessions`, then `GET` or `PUT /checkout-sessions/{id}`, then `POST .../complete` or `.../cancel`. The merchant prices everything in integer cents. The status moves from `incomplete` to `ready_for_complete` to `completed`. Problems come back as typed messages (`out_of_stock`, `not_found`, `quantity_adjusted`, `payment_failed`).
 - **Settlement through MCPal:** `complete` calls MCPal `charge` (card_on_file, PayPal's published test card). With `"dev.mcpal.settlement": "authorize"` it calls `hold` instead, and the merchant later calls `POST /orders/{id}/ship` (`capture_hold`), `/release` (`void_hold`) or `/refund` (`refund`). Cancel runs `void_hold`.
 - **Retry-safe:** a UCP `Idempotency-Key` with the same body replays the first answer, and with a different body gets 409. The MCPal orderRef is derived from the checkout id, so even a complete sent with a new key can never charge twice.
-- **Policy and log:** totals at or above $250.00 stop at the merchant's approval rule. Nothing is charged, and the checkout answers `requires_escalation` with a `continue_url`. Every decision is written to the hash-chained log; see [`/ledger?source=merchant`](https://mcpal.vercel.app/ledger?source=merchant).
+- **Policy and log:** totals at or above $250.00 stop at the merchant's approval rule. Nothing is charged, and the checkout answers `requires_escalation` with a `continue_url`. Every decision is written to the hash-chained log; see [`/ledger?source=merchant`](https://mcpal.app/ledger?source=merchant).
 - **ACP:** the same engine answers the Agentic Commerce Protocol `checkout_sessions` API (2026-04-17) at `/acp/checkout_sessions`. ACP differences are handled: update is a POST, the status names differ, an idempotency conflict returns 422, and the request carries `payment_data`.
 
-**Spec-derived checks:** [`docs/ucp-conformance.md`](docs/ucp-conformance.md). This is our own implementation of the UCP conformance modules, not a run of the official suite. `test/ucp-conformance.test.ts` re-implements the checks of 13 of the 17 official modules from their source (covered or partial), plus ACP and the ship-later extension. Run it against local and production with `UCP_BASE_URL=https://mcpal.vercel.app npx vitest run test/ucp-conformance.test.ts`.
+**Spec-derived checks:** [`docs/ucp-conformance.md`](docs/ucp-conformance.md). This is our own implementation of the UCP conformance modules, not a run of the official suite. `test/ucp-conformance.test.ts` re-implements the checks of 13 of the 17 official modules from their source (covered or partial), plus ACP and the ship-later extension. Run it against local and production with `UCP_BASE_URL=https://mcpal.app npx vitest run test/ucp-conformance.test.ts`.
 
 **Buyer agent:** `web/scripts/buyer-agent.mts` runs gpt-4.1-mini at temperature 0. It only knows the discovery URL and is asked to "buy two bags of coffee under $40 shipped". The transcript and PayPal ids are in [`docs/agentic-commerce-proof.md`](docs/agentic-commerce-proof.md). `/commerce` has a rate-limited "Run the buyer agent live" button.
 

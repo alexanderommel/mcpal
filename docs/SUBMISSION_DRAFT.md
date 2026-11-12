@@ -1,6 +1,6 @@
 # MCPal — Devpost submission (final)
 
-**Links:** demo https://mcpal.vercel.app · install https://mcpal.vercel.app/install · judge console https://mcpal.vercel.app/judge · benchmark https://mcpal.vercel.app/benchmark · policy https://mcpal.vercel.app/policy · repo github.com/alexanderommel/mcpal (MIT)
+**Links:** demo https://mcpal.app · install https://mcpal.app/install · judge console https://mcpal.app/judge · benchmark https://mcpal.app/benchmark · policy https://mcpal.app/policy · repo github.com/alexanderommel/mcpal (MIT)
 
 **Name:** MCPal
 
@@ -18,14 +18,14 @@ MCPal is an MCP server for AI agents, built on PayPal's REST APIs as the layer a
 - merchant quotes the agent can't edit (an injected "$1.00" price is refused),
 - verified PayPal webhooks and a hash-chained decision log.
 
-**Add it to your own agent in one line** (like Stripe's remote MCP): `claude mcp add --transport http mcpal "https://mcpal.vercel.app/mcp?key=<your demo key>"`, or one-click Add to Cursor / Install in VS Code / claude.ai connector at /install. Each visitor gets an isolated sandbox ledger.
+**Add it to your own agent in one line** (like Stripe's remote MCP): `claude mcp add --transport http mcpal "https://mcpal.app/mcp?key=<your demo key>"`, or one-click Add to Cursor / Install in VS Code / claude.ai connector at /install. Each visitor gets an isolated sandbox ledger.
 
 **Bring your own sandbox.** Paste your own PayPal sandbox app's Client ID and Secret on /install and MCPal gives you a demo key that runs on your sandbox account, so you watch the holds and captures land in your own PayPal dashboard. Credentials are checked against the sandbox and refused if they work on live; the secret is encrypted at rest and one click forgets it.
 
 **Policy in plain English (AI inside the product):** a merchant writes "I approve refunds over $100 myself; only pay my couriers juan@x.com and ana@y.com; never more than $500 a day". gpt-4.1-mini proposes the policy; code validates it (limits only loosen when the amount is written, recipients only when written, hard maximums), and nothing applies until a human clicks Apply. The agent has no tool to edit its own rules. 15/15 on our labelled cases, 6/6 adversarial.
 
 ## Agentic commerce (UCP/ACP)
-MCPal also makes a PayPal merchant agent-ready. A demo merchant, Coffee Club Supply, serves the open Universal Commerce Protocol checkout (UCP 2026-04-08, REST) at https://mcpal.vercel.app/ucp/v1, with discovery at /.well-known/ucp. The same engine also answers ACP `checkout_sessions` at /acp/checkout_sessions.
+MCPal also makes a PayPal merchant agent-ready. A demo merchant, Coffee Club Supply, serves the open Universal Commerce Protocol checkout (UCP 2026-04-08, REST) at https://mcpal.app/ucp/v1, with discovery at /.well-known/ucp. The same engine also answers ACP `checkout_sessions` at /acp/checkout_sessions.
 
 Buyer agents send item ids, an address, discount codes and a payment instrument. The merchant prices the order. Then:
 - `complete` runs MCPal `charge` on PayPal (or `hold`, then `capture_hold` when the order ships);
