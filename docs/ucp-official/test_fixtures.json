@@ -1,0 +1,8 @@
+{"test_fixtures":{"valid_item":{"sku":"bag_house_blend_12oz","expected_price":14.0,"quantity":1},
+ "valid_discount_code":"AGENT10","expected_discount_percentage":10.0,
+ "valid_discount_code_2":"BEANS20","expected_discount_percentage_2":20.0,
+ "valid_fixed_discount_code":"FIVEOFF","expected_fixed_discount_reduction":5.0,
+ "free_shipping_min_subtotal":50.0,
+ "dynamic_fulfillment":{"domestic":{"destination":{"street_address":"2211 N First St","address_locality":"San Jose","address_region":"CA","postal_code":"95131","address_country":"US"},"expected_option_id":"std-ground"},
+   "international":{"destination":{"street_address":"25 King St W","address_locality":"Toronto","address_region":"ON","postal_code":"M5V 2H1","address_country":"CA"},"expected_option_id":"intl-express"}}},
+ "shipping_locations":{"domestic_destination":{"street":"2211 N First St","city":"San Jose","state":"CA","postal_code":"95131","country":"US"}}}

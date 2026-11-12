@@ -1,0 +1,7 @@
+{
+  "currency": "USD",
+  "approval_threshold": "500.00",
+  "daily_cap": "2000.00",
+  "refund_ceiling": "250.00",
+  "payout_allowlist": []
+}

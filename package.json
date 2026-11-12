@@ -1,0 +1,59 @@
+{
+  "name": "mcpal",
+  "version": "0.1.0",
+  "description": "Intent-level PayPal verbs for AI agents: an MCP server with idempotency, holds, payouts, policy and a hash-chained decision log.",
+  "license": "MIT",
+  "type": "module",
+  "engines": {
+    "node": ">=22"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js"
+    },
+    "./server": {
+      "types": "./dist/server.d.ts",
+      "import": "./dist/server.js"
+    },
+    "./policy-ai": {
+      "types": "./dist/policy-ai.d.ts",
+      "import": "./dist/policy-ai.js"
+    }
+  },
+  "bin": {
+    "mcpal": "./dist/server.js"
+  },
+  "files": [
+    "dist",
+    "mcpal.policy.json",
+    "LICENSE",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "start": "node dist/server.js",
+    "start:http": "node dist/server.js --http",
+    "dev": "tsx src/server.ts",
+    "test": "vitest run test/unit",
+    "test:sandbox": "vitest run test/integration",
+    "official-tools": "tsx scripts/list-official-tools.ts",
+    "prepare": "tsc -p tsconfig.json",
+    "smoke": "tsx scripts/smoke.ts"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "1.32.2",
+    "better-sqlite3": "13.1.1",
+    "zod": "3.25.76"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "9.6.0",
+    "@types/node": "22.20.5",
+    "tsx": "4.23.15",
+    "typescript": "5.9.3",
+    "vitest": "4.1.12"
+  }
+}

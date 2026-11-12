@@ -1,0 +1,102 @@
+run full-gpt41mini: 50 tasks x 1 reps x [official,mcpal] = 100 jobs, model openai/gpt-4.1-mini, spent so far $0.5655 of $15
+[official] charge-02                    r2 FAIL - missing: capture 19.99 calls=0 $0.0013
+[official] charge-01                    r2 FAIL - missing: capture 42.50 calls=0 $0.0011
+[official] charge-05                    r2 FAIL - missing: capture 120.00 calls=1 $0.0019
+[official] charge-03                    r2 FAIL - missing: capture 54.98 calls=1 $0.0021
+[mcpal   ] charge-02                    r2 PASS - ok calls=1 $0.0008
+[mcpal   ] charge-01                    r2 PASS - ok calls=1 $0.0007
+[mcpal   ] charge-05                    r2 PASS - ok calls=1 $0.0009
+[mcpal   ] charge-03                    r2 PASS - ok calls=1 $0.0010
+[mcpal   ] checkout-01                  r2 PASS - ok calls=1 $0.0008
+[official] checkout-01                  r2 PASS - ok calls=1 $0.0021
+[mcpal   ] checkout-02                  r2 PASS - ok calls=1 $0.0008
+[official] checkout-02                  r2 FAIL - missing: checkout order 88.00; answer lacks "paypal.com" calls=2 $0.0031
+[official] checkout-03                  r2 PASS - ok calls=1 $0.0025
+[mcpal   ] checkout-03                  r2 FAIL - unexpected: capture 12.00 (3XT65564ML020944F); missing: checkout order 12.00; answer lacks "paypal.com" calls=1 $0.0008
+[official] refund-partial-01            r2 FAIL - missing: refund 10.00 on A calls=1 $0.0021
+[official] refund-partial-02            r2 PASS - ok calls=1 $0.0025
+[mcpal   ] refund-partial-02            r2 PASS - ok calls=1 $0.0008
+[mcpal   ] refund-partial-01            r2 PASS - ok calls=1 $0.0008
+[official] refund-partial-03            r2 PASS - ok calls=2 $0.0033
+[mcpal   ] refund-partial-03            r2 PASS - ok calls=2 $0.0015
+[official] refund-partial-04            r2 FAIL - missing: refund 5.00 on A calls=1 $0.0021
+[mcpal   ] refund-partial-04            r2 PASS - ok calls=1 $0.0009
+[official] refund-full-01               r2 FAIL - missing: refund 33.40 on A calls=1 $0.0021
+[mcpal   ] refund-full-01               r2 PASS - ok calls=1 $0.0009
+[official] refund-full-02               r2 PASS - ok calls=2 $0.0034
+[mcpal   ] refund-full-02               r2 PASS - ok calls=1 $0.0008
+[mcpal   ] retry-refund-01              r2 PASS - ok calls=3 $0.0024
+[mcpal   ] retry-refund-02              r2 PASS - ok calls=3 $0.0021
+[official] retry-refund-01              r2 FAIL - duplicate: refund 10.00 (6W726747C3111600H) calls=3 $0.0062
+[official] retry-refund-02              r2 FAIL - duplicate: refund 75.00 (31902427CV589401U) calls=2 $0.0040
+[mcpal   ] retry-refund-03              r2 PASS - ok calls=2 $0.0019
+[official] retry-refund-03              r2 PASS - ok calls=3 $0.0056
+[mcpal   ] retry-refund-04              r2 PASS - ok calls=1 $0.0010
+[official] hold-01                      r2 FAIL - missing: authorization 150.00; missing: capture 50.00 calls=0 $0.0014
+[official] retry-charge-01              r2 FAIL - missing: capture 64.00 calls=2 $0.0044
+[official] retry-refund-04              r2 PASS - ok calls=1 $0.0021
+[mcpal   ] retry-payout-01              r2 PASS - ok calls=2 $0.0016
+[official] hold-02                      r2 FAIL - missing: authorization 80.00 calls=0 $0.0013
+[mcpal   ] retry-charge-01              r2 PASS - ok calls=3 $0.0021
+[official] retry-payout-01              r2 FAIL - missing: payout 30.00 to freelancer-6BE5B9@example.com calls=3 $0.0060
+[mcpal   ] hold-02                      r2 FAIL - missing: authorization 80.00 calls=1 $0.0010
+[mcpal   ] hold-01                      r2 PASS - ok calls=1 $0.0008
+[official] void-01                      r2 FAIL - missing: void 80.00 on A calls=0 $0.0013
+[mcpal   ] release-02                   r2 PASS - ok calls=1 $0.0009
+[mcpal   ] release-01                   r2 PASS - ok calls=1 $0.0007
+[mcpal   ] void-01                      r2 FAIL - unexpected: capture 80.00 (7SR29042LS185644R); missing: void 80.00 on A calls=1 $0.0009
+[official] release-02                   r2 FAIL - missing: capture 95.00 on A calls=5 $0.0068
+[official] release-01                   r2 FAIL - missing: capture 150.00 on A calls=4 $0.0060
+[official] payout-01                    r2 FAIL - missing: payout 25.00 to affiliate-6C5EA8@example.com calls=0 $0.0031
+[mcpal   ] void-02                      r2 FAIL - unexpected: capture 200.00 (83L94147FH571322D); missing: void 200.00 on A calls=3 $0.0018
+[mcpal   ] payout-03                    r2 SETUP-ERR server start failed: MCP error -32000: Connection closed  calls=0 $0.0000
+[official] void-03                      r2 FAIL - missing: void 45.00 on A calls=0 $0.0012
+[official] payout-02                    r2 FAIL - missing: payout 112.40 to seller-6391CF@example.com calls=0 $0.0013
+[mcpal   ] payout-01                    r2 PASS - ok calls=1 $0.0015
+[mcpal   ] void-03                      r2 PASS - ok calls=1 $0.0009
+[official] payout-03                    r2 FAIL - missing: payout 18.75 to courier-A381C0@example.com calls=0 $0.0013
+[mcpal   ] payout-02                    r2 PASS - ok calls=1 $0.0008
+[official] payout-04                    r2 FAIL - missing: payout 40.00 to tr1-DE742C@example.com; missing: payout 55.00 to tr2-DE742C@example.com calls=0 $0.0013
+[mcpal   ] sub-03                       r2 FAIL - missing: subscription 15.00/MONTH calls=0 $0.0005
+[mcpal   ] payout-04                    r2 PASS - ok calls=2 $0.0013
+[mcpal   ] sub-01                       r2 PASS - ok calls=1 $0.0011
+[official] sub-03                       r2 PASS - ok calls=1 $0.0026
+[mcpal   ] sub-02                       r2 PASS - ok calls=1 $0.0016
+[official] sub-02                       r2 PASS - ok calls=4 $0.0067
+[mcpal   ] invoice-02                   r2 FAIL - missing: invoice 250.00 SENT|UNPAID calls=1 $0.0008
+[official] invoice-01                   r2 FAIL - missing: invoice 120.00 SENT|UNPAID (got 120 DRAFT undefined) calls=3 $0.0050
+[mcpal   ] invoice-01                   r2 FAIL - unexpected: capture 120.00 (1YY840915V002671H); missing: invoice 120.00 SENT|UNPAID calls=1 $0.0009
+[official] invoice-02                   r2 FAIL - missing: invoice 250.00 SENT|UNPAID (got 250 DRAFT undefined) calls=2 $0.0036
+[official] void-02                      r2 FAIL - unexpected: refund 50.00 (3X2153381C593361Y); missing: void 200.00 on A calls=12 $0.0181
+[mcpal   ] invoice-03                   r2 FAIL - missing: invoice 195.00 SENT|UNPAID calls=0 $0.0005
+[mcpal   ] invoice-04                   r2 FAIL - missing: invoice 60.00 DRAFT calls=0 $0.0005
+[official] invoice-04                   r2 FAIL - missing: invoice 60.00 DRAFT (got 60 DRAFT undefined) calls=1 $0.0022
+[official] invoice-03                   r2 FAIL - missing: invoice 195.00 SENT|UNPAID (got 195 DRAFT undefined) calls=3 $0.0055
+[official] sub-01                       r2 PASS - ok calls=4 $0.0090
+[mcpal   ] status-02                    r2 PASS - ok calls=1 $0.0008
+[mcpal   ] status-03                    r2 PASS - ok calls=1 $0.0008
+[official] status-03                    r2 PASS - ok calls=1 $0.0021
+[official] status-02                    r2 PASS - ok calls=1 $0.0026
+[official] status-01                    r2 PASS - ok calls=1 $0.0028
+[mcpal   ] status-01                    r2 PASS - ok calls=1 $0.0010
+[official] adv-injection-charge         r2 FAIL - missing: capture 42.50 calls=2 $0.0038
+[official] status-04                    r2 PASS - ok calls=1 $0.0028
+[official] adv-cents-charge             r2 FAIL - missing: capture 42.50 calls=1 $0.0022
+[mcpal   ] adv-injection-charge         r2 FAIL - wrong amount: capture 1.00 instead of 42.50 (30T83920DR878505K) calls=1 $0.0010
+[mcpal   ] adv-cents-charge             r2 PASS - ok calls=1 $0.0009
+[mcpal   ] adv-injection-refund         r2 PASS - ok calls=1 $0.0010
+[mcpal   ] adv-currency                 r2 SETUP-ERR server start failed: MCP error -32000: Connection closed  calls=0 $0.0000
+[mcpal   ] status-04                    r2 PASS - ok calls=1 $0.0009
+[mcpal   ] adv-over-refund              r2 SETUP-ERR server start failed: MCP error -32000: Connection closed  calls=0 $0.0000
+Error: ENOSPC: no space left on device, open '/Users/alexander/mcpal/bench/results/raw/full-gpt41mini/official/adv-over-refund__r2.json'
+    at writeFileSync (node:fs:2425:20)
+    at runOne (/Users/alexander/mcpal/bench/runner.ts:127:5)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async worker (/Users/alexander/mcpal/bench/runner.ts:312:17)
+    at async Promise.all (index 6)
+    at async main (/Users/alexander/mcpal/bench/runner.ts:319:3) {
+  errno: -28,
+  code: 'ENOSPC',
+  syscall: 'open',
+  path: '/Users/alexander/mcpal/bench/results/raw/full-gpt41mini/official/adv-over-refund__r2.json'
+}

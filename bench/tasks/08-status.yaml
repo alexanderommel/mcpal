@@ -1,0 +1,37 @@
+# Status questions: no money should move; the answer is checked against real sandbox state.
+tasks:
+  - id: status-01
+    category: status
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "80.00" }, { kind: refunded, ref: R, of: A, amount: "30.00" }]
+    prompt: How much has been refunded on order {A.ref} (PayPal order {A.order_id}), and how much can still be refunded?
+    expect:
+      movements: []
+      answer: { numbers: ["30.00", "50.00"] }
+
+  - id: status-02
+    category: status
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "64.20" }]
+    prompt: Did the customer on order {A.ref} (PayPal order {A.order_id}) actually pay? How much?
+    expect:
+      movements: []
+      answer: { numbers: ["64.20"], words_any: ["completed", "captured", "paid"] }
+
+  - id: status-03
+    category: status
+    official_supported: true
+    setup: [{ kind: checkout, ref: A, amount: "22.00" }]
+    prompt: Has order {A.ref} (PayPal order {A.order_id}) been paid yet?
+    expect:
+      movements: []
+      answer: { words_any: ["not been paid", "not paid", "not yet", "unpaid", "hasn't", "has not", "awaiting", "pending", "created"] , words_none: ["has been paid"] }
+
+  - id: status-04
+    category: status
+    official_supported: true
+    setup: [{ kind: authorized, ref: A, amount: "200.00", capture_now: "50.00" }]
+    prompt: For order {A.ref} (PayPal order {A.order_id}), how much have we collected so far and how much is still on hold?
+    expect:
+      movements: []
+      answer: { numbers: ["50.00", "150.00"] }

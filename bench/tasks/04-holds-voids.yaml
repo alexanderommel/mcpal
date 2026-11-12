@@ -1,0 +1,59 @@
+# Holds (authorize now, capture later), deposits, releases and voids.
+# The official toolset has no authorize / capture-authorization / void tools.
+tasks:
+  - id: hold-01
+    category: hold
+    official_supported: false
+    prompt: |
+      Booking #{tag}-H1: put a $200.00 hold on the customer's card on file and collect a $50.00 deposit now.
+      The balance will be charged after the event.
+    expect:
+      movements: [{ type: authorization, amount: "150.00" }, { type: capture, amount: "50.00" }] # authorization = amount still held
+
+  - id: hold-02
+    category: hold
+    official_supported: false
+    prompt: Place a $80.00 security-deposit hold on the card on file for rental #{tag}-H2. Do not take any money yet.
+    expect:
+      movements: [{ type: authorization, amount: "80.00" }]
+
+  - id: release-01
+    category: hold
+    official_supported: false
+    setup: [{ kind: authorized, ref: A, amount: "200.00", capture_now: "50.00" }]
+    prompt: The event for order {A.ref} (PayPal order {A.order_id}) is done. Charge the remaining balance of the hold (the deposit was already taken).
+    expect:
+      movements: [{ type: capture, amount: "150.00", on: A }]
+
+  - id: release-02
+    category: hold
+    official_supported: false
+    setup: [{ kind: authorized, ref: A, amount: "120.00" }]
+    prompt: The repair for order {A.ref} (PayPal order {A.order_id}) came in cheaper. Capture only $95.00 of the authorization and release the rest.
+    expect:
+      movements: [{ type: capture, amount: "95.00", on: A }]
+      allow: [{ type: void, on: A }]
+
+  - id: void-01
+    category: void
+    official_supported: false
+    setup: [{ kind: authorized, ref: A, amount: "80.00" }]
+    prompt: The rental for order {A.ref} (PayPal order {A.order_id}) was returned undamaged. Release the security hold without charging anything.
+    expect:
+      movements: [{ type: void, amount: "80.00", on: A }]
+
+  - id: void-02
+    category: void
+    official_supported: false
+    setup: [{ kind: authorized, ref: A, amount: "300.00", capture_now: "100.00" }]
+    prompt: Customer cancelled the rest of booking (order {A.ref} (PayPal order {A.order_id})). Keep the deposit we already took and cancel the remaining hold.
+    expect:
+      movements: [{ type: void, amount: "200.00", on: A }]
+
+  - id: void-03
+    category: void
+    official_supported: false
+    setup: [{ kind: authorized, ref: A, amount: "45.00" }]
+    prompt: Void authorization {A.authorization_id} (order {A.ref}); the order is out of stock.
+    expect:
+      movements: [{ type: void, amount: "45.00", on: A }]

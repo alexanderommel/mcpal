@@ -1,0 +1,36 @@
+# Payouts to email recipients (sandbox). The official toolset has no payouts tool.
+tasks:
+  - id: payout-01
+    category: payout
+    official_supported: false
+    merchant: { known_payees: ["affiliate-{tag}@example.com"] }
+    prompt: Pay our affiliate $25.00 at affiliate-{tag}@example.com for October referrals.
+    expect:
+      movements: [{ type: payout, amount: "25.00", receiver: "affiliate-{tag}@example.com" }]
+
+  - id: payout-02
+    category: payout
+    official_supported: false
+    merchant: { known_payees: ["seller-{tag}@example.com"] }
+    prompt: Send the seller's share of $112.40 to seller-{tag}@example.com for marketplace order {tag}-M9.
+    expect:
+      movements: [{ type: payout, amount: "112.40", receiver: "seller-{tag}@example.com" }]
+
+  - id: payout-03
+    category: payout
+    official_supported: false
+    merchant: { known_payees: ["courier-{tag}@example.com"] }
+    prompt: Reimburse our courier $18.75 for the parking ticket. Their PayPal email is courier-{tag}@example.com.
+    expect:
+      movements: [{ type: payout, amount: "18.75", receiver: "courier-{tag}@example.com" }]
+
+  - id: payout-04
+    category: payout
+    official_supported: false
+    merchant: { known_payees: ["tr1-{tag}@example.com", "tr2-{tag}@example.com"] }
+    prompt: |
+      Pay two translators for job {tag}-T: $40.00 to tr1-{tag}@example.com and $55.00 to tr2-{tag}@example.com.
+    expect:
+      movements:
+        - { type: payout, amount: "40.00", receiver: "tr1-{tag}@example.com" }
+        - { type: payout, amount: "55.00", receiver: "tr2-{tag}@example.com" }

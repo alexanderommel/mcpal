@@ -1,0 +1,29 @@
+# Invoices: the official toolset's strongest area (MCPal: charge with method invoice).
+tasks:
+  - id: invoice-01
+    category: invoice
+    official_supported: true
+    prompt: Invoice {env.PAYPAL_BUYER_EMAIL} for 3 hours of consulting at $40.00/hour (ref {tag}-INV1) and send it.
+    expect:
+      invoices: [{ amount: "120.00", status_in: [SENT, UNPAID] }]
+
+  - id: invoice-02
+    category: invoice
+    official_supported: true
+    prompt: Send {env.PAYPAL_BUYER_EMAIL} an invoice for $250.00 for the website deposit, reference {tag}-INV2.
+    expect:
+      invoices: [{ amount: "250.00", status_in: [SENT, UNPAID] }]
+
+  - id: invoice-03
+    category: invoice
+    official_supported: true
+    prompt: Create and send an invoice to {env.PAYPAL_BUYER_EMAIL} with two lines, "Logo design" $150.00 and "Business cards" $45.00 (ref {tag}-INV3).
+    expect:
+      invoices: [{ amount: "195.00", status_in: [SENT, UNPAID] }]
+
+  - id: invoice-04
+    category: invoice
+    official_supported: true
+    prompt: Draft an invoice for {env.PAYPAL_BUYER_EMAIL} for $60.00 (yoga classes, ref {tag}-INV4). Do not send it yet.
+    expect:
+      invoices: [{ amount: "60.00", status_in: [DRAFT] }]

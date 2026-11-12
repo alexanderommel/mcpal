@@ -1,0 +1,24 @@
+{
+  "name": "mcpal-bench",
+  "private": true,
+  "type": "module",
+  "license": "MIT",
+  "scripts": {
+    "run": "tsx runner.ts",
+    "grade": "tsx grader.ts",
+    "report": "tsx report.ts",
+    "typecheck": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "dotenv": "^18.0.10",
+    "openai": "^7.55.0",
+    "yaml": "^2.9.1"
+  },
+  "devDependencies": {
+    "@paypal/agent-toolkit": "^1.11.0",
+    "@types/node": "^26.6.6",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2"
+  }
+}

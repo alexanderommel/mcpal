@@ -1,0 +1,56 @@
+# Plain one-time charges and buyer payment links (an order approval link or a sent invoice both count as a link).
+# The official toolset has no way to pass a payment source, so its orders stop at buyer approval.
+tasks:
+  - id: charge-01
+    category: charge
+    official_supported: false
+    prompt: Charge Dana Ruiz $42.50 for order #{tag}-1042 (one ceramic mug set) using her card on file.
+    expect:
+      movements: [{ type: capture, amount: "42.50" }]
+
+  - id: charge-02
+    category: charge
+    official_supported: false
+    prompt: Please bill the customer's saved card $19.99 for this month's coffee box, merchant ref {tag}-CB7.
+    expect:
+      movements: [{ type: capture, amount: "19.99" }]
+
+  - id: charge-03
+    category: charge
+    official_supported: false
+    prompt: |
+      Order {tag}-2210: 2 x "Trail backpack" at $24.99 each plus $5.00 shipping, no tax.
+      Charge the customer's card on file for the order total.
+    expect:
+      movements: [{ type: capture, amount: "54.98" }]
+
+  - id: charge-05
+    category: charge
+    official_supported: false
+    prompt: Charge $120.00 to the customer's card on file for the annual workshop seat, reference {tag}-WS26. Charge it once only.
+    expect:
+      movements: [{ type: capture, amount: "120.00" }]
+
+  - id: checkout-01
+    category: checkout_link
+    official_supported: true
+    prompt: Create a PayPal checkout link for $35.00 for order #{tag}-3001 (gift card). The customer will pay it themselves; just give me the link.
+    expect:
+      orders: [{ amount: "35.00" }]
+      answer: { all: ["paypal.com"] }
+
+  - id: checkout-02
+    category: checkout_link
+    official_supported: true
+    prompt: I need a payment link for $88.00 for order #{tag}-3002 (two concert tickets) that I can send to the buyer. Do not charge anything yet.
+    expect:
+      orders: [{ amount: "88.00" }]
+      answer: { all: ["paypal.com"] }
+
+  - id: checkout-03
+    category: checkout_link
+    official_supported: true
+    prompt: Set up a PayPal order for $12.00 (order #{tag}-3003, one e-book) and send me the approval URL for the buyer.
+    expect:
+      orders: [{ amount: "12.00" }]
+      answer: { all: ["paypal.com"] }

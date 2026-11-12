@@ -1,0 +1,24 @@
+# Subscriptions. Both toolsets can create product + plan + subscription.
+# Without a buyer in a browser, a new subscription stays APPROVAL_PENDING; that counts as success.
+tasks:
+  - id: sub-01
+    category: subscription
+    official_supported: true
+    prompt: Set up a $9.00 per month "Pro" subscription for customer {env.PAYPAL_BUYER_EMAIL} (merchant ref {tag}-S1) and give me the approval link.
+    expect:
+      subscriptions: [{ price: "9.00", interval: MONTH }]
+
+  - id: sub-02
+    category: subscription
+    official_supported: true
+    prompt: Create a yearly membership at $90.00/year called "Studio Annual {tag}" and start a subscription for {env.PAYPAL_BUYER_EMAIL}.
+    expect:
+      subscriptions: [{ price: "90.00", interval: YEAR }]
+
+  - id: sub-03
+    category: subscription
+    official_supported: true
+    setup: [{ kind: plan, ref: P, price: "15.00", interval: MONTH }]
+    prompt: Subscribe {env.PAYPAL_BUYER_EMAIL} to our existing plan {P.plan_id} ($15/month). Don't create a new plan.
+    expect:
+      subscriptions: [{ price: "15.00", interval: MONTH, plan: "{P.plan_id}" }]

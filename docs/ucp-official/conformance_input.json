@@ -1,0 +1,4 @@
+{"ucp_version":"2026-04-08","required_capabilities":["dev.ucp.shopping.checkout","dev.ucp.shopping.order"],"currency":"USD",
+ "items":[{"id":"bag_house_blend_12oz","title":"House Blend whole bean, 12 oz bag","price":1400},{"id":"bag_ethiopia_yirgacheffe_12oz","title":"Ethiopia Yirgacheffe whole bean, 12 oz bag","price":1800}],
+ "out_of_stock_item":{"id":"bag_panama_geisha_4oz","title":"Panama Geisha whole bean, 4 oz (sold out)"},
+ "non_existent_item":{"id":"non_existent_sku_xyz","title":"Non-existent Item"}}

@@ -1,0 +1,49 @@
+# Refunds on a real sandbox capture seeded before the run (same seed for both arms).
+tasks:
+  - id: refund-partial-01
+    category: partial_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "60.00" }]
+    prompt: Order {A.ref} (PayPal order {A.order_id}) arrived with one item missing. Refund the customer $10.00.
+    expect:
+      movements: [{ type: refund, amount: "10.00", on: A }]
+
+  - id: refund-partial-02
+    category: partial_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "149.90" }]
+    prompt: Give a $25.00 goodwill refund on PayPal capture {A.capture_id} (order {A.ref}); the delivery was late.
+    expect:
+      movements: [{ type: refund, amount: "25.00", on: A }]
+
+  - id: refund-partial-03
+    category: partial_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "80.00" }]
+    prompt: The customer on order {A.ref} (PayPal order {A.order_id}) returned half of the order. Refund half of what they paid.
+    expect:
+      movements: [{ type: refund, amount: "40.00", on: A }]
+
+  - id: refund-partial-04
+    category: partial_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "45.00" }, { kind: refunded, ref: R, of: A, amount: "15.00" }]
+    prompt: On order {A.ref} (PayPal order {A.order_id}) we already refunded part of it. Now refund another $5.00 for a damaged sleeve.
+    expect:
+      movements: [{ type: refund, amount: "5.00", on: A }]
+
+  - id: refund-full-01
+    category: full_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "33.40" }]
+    prompt: The customer cancelled order {A.ref} (PayPal order {A.order_id}). Refund the whole payment.
+    expect:
+      movements: [{ type: refund, amount: "33.40", on: A }]
+
+  - id: refund-full-02
+    category: full_refund
+    official_supported: true
+    setup: [{ kind: captured, ref: A, amount: "50.00" }, { kind: refunded, ref: R, of: A, amount: "20.00" }]
+    prompt: Refund everything that is still refundable on order {A.ref} (PayPal order {A.order_id}); the customer is closing their account.
+    expect:
+      movements: [{ type: refund, amount: "30.00", on: A }]

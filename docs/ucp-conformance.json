@@ -1,0 +1,872 @@
+{
+  "title": "UCP spec-derived checks (our implementation of the UCP conformance modules), not the official suite run",
+  "note": "Checks re-implemented in test/ucp-conformance.test.ts from the source of github.com/Universal-Commerce-Protocol/conformance at commit 1201fb78e85217c5f2df060066ccbb0a1d1dce0b and the UCP schemas at commit 98607bc53f6f5e43ec15b9f96b82cba4912f0fe4. The official Python suite was not executed: running its code (and installing ucp-sdk 0.4.6) was blocked by this environment's permission policy. To run it yourself: clone the conformance repo, then SERVER_URL=https://mcpal.vercel.app uv run pytest with a conformance_input.json naming bag_house_blend_12oz / bag_panama_geisha_4oz and test_fixtures.json with AGENT10 (10%), BEANS20 (20%), FIVEOFF (5.00).",
+  "ucp_version": "2026-04-08",
+  "modules": [
+    {
+      "official_module": "shopping/checkout/protocol_test.py",
+      "our_module": "checkout/protocol",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 3,
+          "fail": 0
+        },
+        "production": {
+          "pass": 3,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/checkout/lifecycle_test.py",
+      "our_module": "checkout/lifecycle",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 11,
+          "fail": 0
+        },
+        "production": {
+          "pass": 11,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/checkout/idempotency_test.py",
+      "our_module": "checkout/idempotency",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 4,
+          "fail": 0
+        },
+        "production": {
+          "pass": 4,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/checkout/totals_test.py",
+      "our_module": "checkout/totals",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 6,
+          "fail": 0
+        },
+        "production": {
+          "pass": 6,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/checkout/business_logic_test.py",
+      "our_module": "checkout/business_logic",
+      "coverage": "partial",
+      "note": "test_buyer_consent not re-implemented: the buyer_consent capability is not advertised (consent is stored and echoed, not acted on).",
+      "results": {
+        "local": {
+          "pass": 7,
+          "fail": 0
+        },
+        "production": {
+          "pass": 7,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/discount/semantics_test.py",
+      "our_module": "discount/semantics",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 6,
+          "fail": 0
+        },
+        "production": {
+          "pass": 6,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/fulfillment/fulfillment_test.py",
+      "our_module": "fulfillment/fulfillment",
+      "coverage": "partial",
+      "note": "Known-customer stored-address tests (5) are unsupported: the merchant keeps no customer address book. Item-based free shipping is not offered (the official test would skip).",
+      "results": {
+        "local": {
+          "pass": 3,
+          "fail": 0
+        },
+        "production": {
+          "pass": 3,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/fulfillment/structure_test.py",
+      "our_module": "fulfillment/structure",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 2,
+          "fail": 0
+        },
+        "production": {
+          "pass": 2,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/order/order_test.py",
+      "our_module": "order/order",
+      "coverage": "partial",
+      "note": "GET /orders/{id} and expectations are checked. PUT /orders/{id} (platform-written fulfillment events and adjustments) is unsupported; shipping and refunds go through the merchant's own MCPal actions instead.",
+      "results": {
+        "local": {
+          "pass": 1,
+          "fail": 0
+        },
+        "production": {
+          "pass": 1,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/validation/validation_test.py",
+      "our_module": "validation/validation",
+      "coverage": "covered",
+      "results": {
+        "local": {
+          "pass": 5,
+          "fail": 0
+        },
+        "production": {
+          "pass": 5,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "shopping/validation/invalid_input_test.py",
+      "our_module": null,
+      "coverage": "unsupported",
+      "note": "Needs PUT /orders/{id}, which is not implemented.",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    },
+    {
+      "official_module": "common/payments/card_credential_test.py",
+      "our_module": "payments/card_credential",
+      "coverage": "covered",
+      "note": "The card number is never forwarded: the sandbox handler charges PayPal's published sandbox test card through MCPal.",
+      "results": {
+        "local": {
+          "pass": 1,
+          "fail": 0
+        },
+        "production": {
+          "pass": 1,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "official_module": "common/payments/token_binding_test.py",
+      "our_module": null,
+      "coverage": "not checked",
+      "note": "A token with a binding completes (binding accepted but not verified).",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    },
+    {
+      "official_module": "common/payments/ap2_test.py",
+      "our_module": null,
+      "coverage": "unsupported",
+      "note": "AP2 mandates are ignored, not verified.",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    },
+    {
+      "official_module": "shopping/order/webhook_test.py",
+      "our_module": null,
+      "coverage": "unsupported",
+      "note": "No order webhooks are delivered to the platform.",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    },
+    {
+      "official_module": "shopping/order/webhook_structure_test.py",
+      "our_module": null,
+      "coverage": "unsupported",
+      "note": "No order webhooks (so no Standard Webhooks headers, retries or RFC 9421 signatures).",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    },
+    {
+      "official_module": "shopping/order/simulation_url_security_test.py",
+      "our_module": null,
+      "coverage": "unsupported",
+      "note": "No /testing/simulate-shipping endpoint; shipping is the merchant's POST /orders/{id}/ship (MCPal capture_hold).",
+      "results": {
+        "local": null,
+        "production": null
+      }
+    }
+  ],
+  "extensions": [
+    {
+      "module": "mcpal/settlement",
+      "title": "MCPal extension (not UCP): ship-later settlement",
+      "note": "Authorize at complete (MCPal hold), capture on ship (capture_hold), partial refund (refund).",
+      "results": {
+        "local": {
+          "pass": 1,
+          "fail": 0
+        },
+        "production": {
+          "pass": 1,
+          "fail": 0
+        }
+      }
+    },
+    {
+      "module": "acp/checkout_sessions",
+      "title": "ACP checkout_sessions (not UCP)",
+      "note": "Spec-derived from the ACP 2026-04-17 OpenAPI; there is no ACP conformance suite to mirror.",
+      "results": {
+        "local": {
+          "pass": 4,
+          "fail": 0
+        },
+        "production": {
+          "pass": 4,
+          "fail": 0
+        }
+      }
+    }
+  ],
+  "runs": {
+    "local": {
+      "at": "2026-11-12T15:43:02.786Z",
+      "passed": 54,
+      "total": 54,
+      "modules": {
+        "checkout/protocol": {
+          "pass": 3,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_discovery: version, capabilities, handlers with id+version, REST service endpoint (overview.md discovery)",
+              "ok": true
+            },
+            {
+              "name": "test_discovery_urls: every advertised spec/schema URL answers 200",
+              "ok": true
+            },
+            {
+              "name": "test_version_negotiation: advertised version accepted, 2099-01-01 refused with 422 (checkout-rest.md UCP-Agent)",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/lifecycle": {
+          "pass": 11,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_create_checkout: 201 with id, status, line_items, totals, links (checkout.json required fields)",
+              "ok": true
+            },
+            {
+              "name": "test_get_checkout: GET returns the same session",
+              "ok": true
+            },
+            {
+              "name": "test_update_checkout: buyer and a second destination persist (PUT full replacement)",
+              "ok": true
+            },
+            {
+              "name": "test_cancel_checkout: cancel answers 200 with status canceled",
+              "ok": true
+            },
+            {
+              "name": "test_complete_checkout: complete answers 200, status completed, order.id + permalink_url (order_confirmation.json)",
+              "ok": true
+            },
+            {
+              "name": "test_ready_for_complete_when_nothing_is_outstanding: no errors, no actions => ready_for_complete, then completes",
+              "ok": true
+            },
+            {
+              "name": "test_repeated_cancel: 200 canceled again, or a 4xx",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_update_canceled_checkout: 4xx",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_complete_canceled_checkout: 4xx, GET still answers 200",
+              "ok": true
+            },
+            {
+              "name": "test_complete_is_idempotent: completing a completed checkout (new key) is refused with 4xx, never charged twice",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_update_completed_checkout + test_cannot_cancel_completed_checkout: 4xx",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/idempotency": {
+          "pass": 4,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_idempotency_create: same key+body => identical status and body; same key, different body => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_update: replay matches; changed body with the same key => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_complete: replay returns the same completed order (one PayPal capture); changed body => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_cancel: replay answers the same status",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/totals": {
+          "pass": 6,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_single_subtotal_entry (checkout.md: subtotal MUST NOT repeat)",
+              "ok": true
+            },
+            {
+              "name": "test_single_total_entry (checkout.md: total MUST NOT repeat)",
+              "ok": true
+            },
+            {
+              "name": "test_entries_have_type_and_amount (total.json required: type, amount; amounts are integer minor units)",
+              "ok": true
+            },
+            {
+              "name": "test_additive_entries_non_negative (subtotal, fulfillment, tax, fee >= 0)",
+              "ok": true
+            },
+            {
+              "name": "test_discount_entry_is_negative (total.json: discount amount exclusiveMaximum 0)",
+              "ok": true
+            },
+            {
+              "name": "sum invariant: sum(non-total entries) == total (checkout.md Verification)",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/business_logic": {
+          "pass": 7,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_totals_calculation_on_create: subtotal = price x qty",
+              "ok": true
+            },
+            {
+              "name": "test_totals_recalculation_on_update: quantity 1 -> 3 recomputes subtotal and total",
+              "ok": true
+            },
+            {
+              "name": "test_discount_flow: valid code applied, discount = round(price x pct)",
+              "ok": true
+            },
+            {
+              "name": "test_multiple_discounts_accepted: both codes applied, sequential or cumulative",
+              "ok": true
+            },
+            {
+              "name": "test_multiple_discounts_one_rejected: only the valid one applies",
+              "ok": true
+            },
+            {
+              "name": "test_fixed_amount_discount: fixed reduction in minor units",
+              "ok": true
+            },
+            {
+              "name": "test_buyer_info_persistence: buyer survives a later update and a GET",
+              "ok": true
+            }
+          ]
+        },
+        "discount/semantics": {
+          "pass": 6,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_code_matches_case_insensitively (discount.json: codes are case-insensitive)",
+              "ok": true
+            },
+            {
+              "name": "test_discount_total_is_negative",
+              "ok": true
+            },
+            {
+              "name": "test_allocations_sum_to_applied_amount (discount.json allocation)",
+              "ok": true
+            },
+            {
+              "name": "test_client_applied_does_not_change_price (applied[] is response-only)",
+              "ok": true
+            },
+            {
+              "name": "test_empty_codes_removes_discount",
+              "ok": true
+            },
+            {
+              "name": "test_codes_replace_previous_set",
+              "ok": true
+            }
+          ]
+        },
+        "fulfillment/fulfillment": {
+          "pass": 3,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_fulfillment_flow: destination => options; selecting one adds a fulfillment total",
+              "ok": true
+            },
+            {
+              "name": "test_dynamic_fulfillment: domestic and international destinations offer their own option ids",
+              "ok": true
+            },
+            {
+              "name": "test_free_shipping_on_expensive_order: a zero-cost option at or above the threshold",
+              "ok": true
+            }
+          ]
+        },
+        "fulfillment/structure": {
+          "pass": 2,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_option_titles_distinguish_siblings: non-empty, distinct titles",
+              "ok": true
+            },
+            {
+              "name": "test_default_config_single_group_per_method: one group carrying all of the method's items",
+              "ok": true
+            }
+          ]
+        },
+        "validation/validation": {
+          "pass": 5,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_out_of_stock: typed out_of_stock / item_unavailable",
+              "ok": true
+            },
+            {
+              "name": "test_update_inventory_validation: quantity beyond stock is clamped with quantity_adjusted, or refused",
+              "ok": true
+            },
+            {
+              "name": "test_product_not_found: typed not_found / item_unavailable",
+              "ok": true
+            },
+            {
+              "name": "complete without fulfillment: typed missing / field_required, not completed",
+              "ok": true
+            },
+            {
+              "name": "test_payment_failure: fail_token => payment_failed, checkout not completed",
+              "ok": true
+            }
+          ]
+        },
+        "payments/card_credential": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_card_credential_payment: a raw card credential completes (sandbox: MCPal charges PayPal's test card)",
+              "ok": true
+            }
+          ]
+        },
+        "order/order": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_order_retrieval: GET /orders/{id} answers the order (order.json required fields)",
+              "ok": true
+            }
+          ]
+        },
+        "acp/checkout_sessions": {
+          "pass": 4,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "create: 201 with the CheckoutSession required fields; not_ready_for_payment until a shipping option is chosen",
+              "ok": true
+            },
+            {
+              "name": "update (POST) selects a fulfillment option => ready_for_payment; complete => completed with order.checkout_session_id",
+              "ok": true
+            },
+            {
+              "name": "idempotency: same key + same body replays; same key + different body => 422; POST without Idempotency-Key => 400",
+              "ok": true
+            },
+            {
+              "name": "errors: {type, code, message}; unknown session => 404; missing Authorization => 401",
+              "ok": true
+            }
+          ]
+        },
+        "mcpal/settlement": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "authorize at complete, capture on ship, partial refund: PayPal ids on the order",
+              "ok": true
+            }
+          ]
+        }
+      }
+    },
+    "production": {
+      "at": "2026-11-12T15:45:53.058Z",
+      "passed": 54,
+      "total": 54,
+      "modules": {
+        "checkout/protocol": {
+          "pass": 3,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_discovery: version, capabilities, handlers with id+version, REST service endpoint (overview.md discovery)",
+              "ok": true
+            },
+            {
+              "name": "test_discovery_urls: every advertised spec/schema URL answers 200",
+              "ok": true
+            },
+            {
+              "name": "test_version_negotiation: advertised version accepted, 2099-01-01 refused with 422 (checkout-rest.md UCP-Agent)",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/lifecycle": {
+          "pass": 11,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_create_checkout: 201 with id, status, line_items, totals, links (checkout.json required fields)",
+              "ok": true
+            },
+            {
+              "name": "test_get_checkout: GET returns the same session",
+              "ok": true
+            },
+            {
+              "name": "test_update_checkout: buyer and a second destination persist (PUT full replacement)",
+              "ok": true
+            },
+            {
+              "name": "test_cancel_checkout: cancel answers 200 with status canceled",
+              "ok": true
+            },
+            {
+              "name": "test_complete_checkout: complete answers 200, status completed, order.id + permalink_url (order_confirmation.json)",
+              "ok": true
+            },
+            {
+              "name": "test_ready_for_complete_when_nothing_is_outstanding: no errors, no actions => ready_for_complete, then completes",
+              "ok": true
+            },
+            {
+              "name": "test_repeated_cancel: 200 canceled again, or a 4xx",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_update_canceled_checkout: 4xx",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_complete_canceled_checkout: 4xx, GET still answers 200",
+              "ok": true
+            },
+            {
+              "name": "test_complete_is_idempotent: completing a completed checkout (new key) is refused with 4xx, never charged twice",
+              "ok": true
+            },
+            {
+              "name": "test_cannot_update_completed_checkout + test_cannot_cancel_completed_checkout: 4xx",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/idempotency": {
+          "pass": 4,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_idempotency_create: same key+body => identical status and body; same key, different body => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_update: replay matches; changed body with the same key => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_complete: replay returns the same completed order (one PayPal capture); changed body => 409",
+              "ok": true
+            },
+            {
+              "name": "test_idempotency_cancel: replay answers the same status",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/totals": {
+          "pass": 6,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_single_subtotal_entry (checkout.md: subtotal MUST NOT repeat)",
+              "ok": true
+            },
+            {
+              "name": "test_single_total_entry (checkout.md: total MUST NOT repeat)",
+              "ok": true
+            },
+            {
+              "name": "test_entries_have_type_and_amount (total.json required: type, amount; amounts are integer minor units)",
+              "ok": true
+            },
+            {
+              "name": "test_additive_entries_non_negative (subtotal, fulfillment, tax, fee >= 0)",
+              "ok": true
+            },
+            {
+              "name": "test_discount_entry_is_negative (total.json: discount amount exclusiveMaximum 0)",
+              "ok": true
+            },
+            {
+              "name": "sum invariant: sum(non-total entries) == total (checkout.md Verification)",
+              "ok": true
+            }
+          ]
+        },
+        "checkout/business_logic": {
+          "pass": 7,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_totals_calculation_on_create: subtotal = price x qty",
+              "ok": true
+            },
+            {
+              "name": "test_totals_recalculation_on_update: quantity 1 -> 3 recomputes subtotal and total",
+              "ok": true
+            },
+            {
+              "name": "test_discount_flow: valid code applied, discount = round(price x pct)",
+              "ok": true
+            },
+            {
+              "name": "test_multiple_discounts_accepted: both codes applied, sequential or cumulative",
+              "ok": true
+            },
+            {
+              "name": "test_multiple_discounts_one_rejected: only the valid one applies",
+              "ok": true
+            },
+            {
+              "name": "test_fixed_amount_discount: fixed reduction in minor units",
+              "ok": true
+            },
+            {
+              "name": "test_buyer_info_persistence: buyer survives a later update and a GET",
+              "ok": true
+            }
+          ]
+        },
+        "discount/semantics": {
+          "pass": 6,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_code_matches_case_insensitively (discount.json: codes are case-insensitive)",
+              "ok": true
+            },
+            {
+              "name": "test_discount_total_is_negative",
+              "ok": true
+            },
+            {
+              "name": "test_allocations_sum_to_applied_amount (discount.json allocation)",
+              "ok": true
+            },
+            {
+              "name": "test_client_applied_does_not_change_price (applied[] is response-only)",
+              "ok": true
+            },
+            {
+              "name": "test_empty_codes_removes_discount",
+              "ok": true
+            },
+            {
+              "name": "test_codes_replace_previous_set",
+              "ok": true
+            }
+          ]
+        },
+        "fulfillment/fulfillment": {
+          "pass": 3,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_fulfillment_flow: destination => options; selecting one adds a fulfillment total",
+              "ok": true
+            },
+            {
+              "name": "test_dynamic_fulfillment: domestic and international destinations offer their own option ids",
+              "ok": true
+            },
+            {
+              "name": "test_free_shipping_on_expensive_order: a zero-cost option at or above the threshold",
+              "ok": true
+            }
+          ]
+        },
+        "fulfillment/structure": {
+          "pass": 2,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_option_titles_distinguish_siblings: non-empty, distinct titles",
+              "ok": true
+            },
+            {
+              "name": "test_default_config_single_group_per_method: one group carrying all of the method's items",
+              "ok": true
+            }
+          ]
+        },
+        "validation/validation": {
+          "pass": 5,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_out_of_stock: typed out_of_stock / item_unavailable",
+              "ok": true
+            },
+            {
+              "name": "test_update_inventory_validation: quantity beyond stock is clamped with quantity_adjusted, or refused",
+              "ok": true
+            },
+            {
+              "name": "test_product_not_found: typed not_found / item_unavailable",
+              "ok": true
+            },
+            {
+              "name": "complete without fulfillment: typed missing / field_required, not completed",
+              "ok": true
+            },
+            {
+              "name": "test_payment_failure: fail_token => payment_failed, checkout not completed",
+              "ok": true
+            }
+          ]
+        },
+        "payments/card_credential": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_card_credential_payment: a raw card credential completes (sandbox: MCPal charges PayPal's test card)",
+              "ok": true
+            }
+          ]
+        },
+        "order/order": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "test_order_retrieval: GET /orders/{id} answers the order (order.json required fields)",
+              "ok": true
+            }
+          ]
+        },
+        "acp/checkout_sessions": {
+          "pass": 4,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "create: 201 with the CheckoutSession required fields; not_ready_for_payment until a shipping option is chosen",
+              "ok": true
+            },
+            {
+              "name": "update (POST) selects a fulfillment option => ready_for_payment; complete => completed with order.checkout_session_id",
+              "ok": true
+            },
+            {
+              "name": "idempotency: same key + same body replays; same key + different body => 422; POST without Idempotency-Key => 400",
+              "ok": true
+            },
+            {
+              "name": "errors: {type, code, message}; unknown session => 404; missing Authorization => 401",
+              "ok": true
+            }
+          ]
+        },
+        "mcpal/settlement": {
+          "pass": 1,
+          "fail": 0,
+          "tests": [
+            {
+              "name": "authorize at complete, capture on ship, partial refund: PayPal ids on the order",
+              "ok": true
+            }
+          ]
+        }
+      }
+    }
+  }
+}

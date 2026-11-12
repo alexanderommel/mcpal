@@ -1,0 +1,266 @@
+{
+ "generatedAt": "2026-11-12T14:09:32.437Z",
+ "tasks": 50,
+ "note": "pass1 = run 1 of every task only (same footing for every model). allRuns = every run, pass^k, when a model has more than one run.",
+ "models": [
+  {
+   "runId": "run2",
+   "model": "gpt-4.1-mini",
+   "provider": "openai",
+   "reps": 3,
+   "arms": {
+    "official": {
+     "pass1": {
+      "tasks": 50,
+      "runs": 50,
+      "reps": 1,
+      "tasksCorrect": 21,
+      "tasksCorrectAnyRun": 21,
+      "runSuccessRate": 0.42,
+      "duplicates": 2,
+      "wrongAmount": 0,
+      "unexpected": 0,
+      "misMovedUsd": 85,
+      "runsWithBadMoney": 2,
+      "adversarial": {
+       "n": 9,
+       "passAll": 6
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 21
+      },
+      "failureKinds": {
+       "not_supported": 20,
+       "incomplete": 7,
+       "wrong_money": 2
+      },
+      "tokensPerTask": 21067,
+      "costPerTaskUsd": 0.0033,
+      "totalCostUsd": 0.17,
+      "excludedRuns": 0
+     },
+     "allRuns": {
+      "tasks": 50,
+      "runs": 150,
+      "reps": 3,
+      "tasksCorrect": 17,
+      "tasksCorrectAnyRun": 21,
+      "runSuccessRate": 0.39,
+      "duplicates": 5,
+      "wrongAmount": 0,
+      "unexpected": 1,
+      "misMovedUsd": 295,
+      "runsWithBadMoney": 6,
+      "adversarial": {
+       "n": 9,
+       "passAll": 3
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 17
+      },
+      "failureKinds": {
+       "not_supported": 59,
+       "incomplete": 25,
+       "bad_answer": 1,
+       "wrong_money": 6
+      },
+      "tokensPerTask": 21837,
+      "costPerTaskUsd": 0.0034,
+      "totalCostUsd": 0.51,
+      "excludedRuns": 0
+     }
+    },
+    "mcpal": {
+     "pass1": {
+      "tasks": 50,
+      "runs": 50,
+      "reps": 1,
+      "tasksCorrect": 49,
+      "tasksCorrectAnyRun": 49,
+      "runSuccessRate": 0.98,
+      "duplicates": 0,
+      "wrongAmount": 0,
+      "unexpected": 0,
+      "misMovedUsd": 0,
+      "runsWithBadMoney": 0,
+      "adversarial": {
+       "n": 9,
+       "passAll": 9
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 29
+      },
+      "failureKinds": {
+       "incomplete": 1
+      },
+      "tokensPerTask": 6519,
+      "costPerTaskUsd": 0.0012,
+      "totalCostUsd": 0.06,
+      "excludedRuns": 0
+     },
+     "allRuns": {
+      "tasks": 50,
+      "runs": 144,
+      "reps": 3,
+      "tasksCorrect": 49,
+      "tasksCorrectAnyRun": 49,
+      "runSuccessRate": 0.98,
+      "duplicates": 0,
+      "wrongAmount": 0,
+      "unexpected": 0,
+      "misMovedUsd": 0,
+      "runsWithBadMoney": 0,
+      "adversarial": {
+       "n": 9,
+       "passAll": 9
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 29
+      },
+      "failureKinds": {
+       "incomplete": 3
+      },
+      "tokensPerTask": 6584,
+      "costPerTaskUsd": 0.0012,
+      "totalCostUsd": 0.18,
+      "excludedRuns": 0
+     }
+    }
+   }
+  },
+  {
+   "runId": "run3-qwen",
+   "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+   "provider": "deepinfra",
+   "reps": 3,
+   "arms": {
+    "official": {
+     "pass1": {
+      "tasks": 50,
+      "runs": 50,
+      "reps": 1,
+      "tasksCorrect": 24,
+      "tasksCorrectAnyRun": 24,
+      "runSuccessRate": 0.48,
+      "duplicates": 2,
+      "wrongAmount": 1,
+      "unexpected": 3,
+      "misMovedUsd": 300,
+      "runsWithBadMoney": 5,
+      "adversarial": {
+       "n": 9,
+       "passAll": 5
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 24
+      },
+      "failureKinds": {
+       "not_supported": 18,
+       "wrong_money": 5,
+       "incomplete": 3
+      },
+      "tokensPerTask": 40302,
+      "costPerTaskUsd": 0.0038,
+      "totalCostUsd": 0.19,
+      "excludedRuns": 0
+     },
+     "allRuns": {
+      "tasks": 50,
+      "runs": 150,
+      "reps": 3,
+      "tasksCorrect": 20,
+      "tasksCorrectAnyRun": 25,
+      "runSuccessRate": 0.45,
+      "duplicates": 5,
+      "wrongAmount": 3,
+      "unexpected": 5,
+      "misMovedUsd": 740,
+      "runsWithBadMoney": 12,
+      "adversarial": {
+       "n": 9,
+       "passAll": 4
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 20
+      },
+      "failureKinds": {
+       "not_supported": 56,
+       "wrong_money": 12,
+       "bad_answer": 1,
+       "incomplete": 13
+      },
+      "tokensPerTask": 38348,
+      "costPerTaskUsd": 0.0036,
+      "totalCostUsd": 0.54,
+      "excludedRuns": 0
+     }
+    },
+    "mcpal": {
+     "pass1": {
+      "tasks": 50,
+      "runs": 50,
+      "reps": 1,
+      "tasksCorrect": 48,
+      "tasksCorrectAnyRun": 48,
+      "runSuccessRate": 0.96,
+      "duplicates": 0,
+      "wrongAmount": 0,
+      "unexpected": 0,
+      "misMovedUsd": 0,
+      "runsWithBadMoney": 0,
+      "adversarial": {
+       "n": 9,
+       "passAll": 9
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 29
+      },
+      "failureKinds": {
+       "incomplete": 2
+      },
+      "tokensPerTask": 9008,
+      "costPerTaskUsd": 0.0009,
+      "totalCostUsd": 0.04,
+      "excludedRuns": 0
+     },
+     "allRuns": {
+      "tasks": 50,
+      "runs": 150,
+      "reps": 3,
+      "tasksCorrect": 46,
+      "tasksCorrectAnyRun": 48,
+      "runSuccessRate": 0.95,
+      "duplicates": 0,
+      "wrongAmount": 0,
+      "unexpected": 1,
+      "misMovedUsd": 50,
+      "runsWithBadMoney": 1,
+      "adversarial": {
+       "n": 9,
+       "passAll": 8
+      },
+      "officialSupported": {
+       "n": 30,
+       "passAll": 28
+      },
+      "failureKinds": {
+       "wrong_money": 1,
+       "incomplete": 7
+      },
+      "tokensPerTask": 9032,
+      "costPerTaskUsd": 0.0009,
+      "totalCostUsd": 0.13,
+      "excludedRuns": 0
+     }
+    }
+   }
+  }
+ ]
+}
