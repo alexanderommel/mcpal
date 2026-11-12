@@ -1,6 +1,6 @@
 # MCPal
 
-PayPal for AI agents in 8 verbs. MCPal is an MCP server and a TypeScript library that sits between an AI agent and the PayPal REST APIs.
+**PayPal, made for AI agents.** MCPal is an MCP server and a TypeScript library that sits between an AI agent and the PayPal REST APIs: 8 verbs that match what a business asks for (including holds, payouts and subscriptions), plus a checkout buyer agents can use (UCP/ACP). Simple to integrate, safe to retry.
 
 PayPal's official agent toolkit (`@paypal/mcp@1.8.1 --tools=all`) gives a model 28 low-level tools (PayPal's hosted server at mcp.sandbox.paypal.com lists 46 — checked 2026-11-12 — and also has no tools for holds, payouts or retry-safe keys): create an order, get an order, pay an order, create a product, create a plan, and so on. The agent has to pick the right tools, chain them in the right order and retry without paying twice. It also has no tools for authorizations (holds and deposits) or Payouts. MCPal replaces those tools with verbs that match what a business asks for. Each verb runs the whole PayPal flow behind it.
 

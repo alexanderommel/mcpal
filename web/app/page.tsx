@@ -22,7 +22,7 @@ import {
 
 export const dynamic = "force-static";
 export const metadata: Metadata = {
-  title: "MCPal — Give your AI agent PayPal, safely",
+  title: "MCPal — PayPal, made for AI agents",
 };
 
 function firstSentence(s: string) {
@@ -111,13 +111,14 @@ export default async function Home() {
               Remote MCP server · PayPal REST APIs
             </div>
             <h1>
-              Give your AI agent PayPal.
+              PayPal,
               <br />
-              <em>Keep control of the money.</em>
+              <em>made for AI agents.</em>
             </h1>
             <p className="hero-lede">
-              {verbs.length} verbs on top of PayPal&apos;s APIs. Retries never
-              pay twice. New payees wait for a human.
+              {verbs.length} verbs and a buyer checkout on top of PayPal&apos;s
+              APIs. Holds, payouts and subscriptions in one call each. Simple
+              to integrate, safe to retry.
             </p>
             <InstallCompact />
           </div>

@@ -4,7 +4,7 @@
 
 **Name:** MCPal
 
-**Tagline (≤200 chars):** Give your AI agent PayPal, safely. One MCP line adds 8 verbs on top of PayPal's APIs. Same model, same 50 tasks: 29/30 vs 17/30 with the official tools, and no payment made twice.
+**Tagline (≤200 chars):** PayPal, made for AI agents: 8 verbs and a buyer checkout on PayPal's APIs, safe to retry. Same model, same 50 tasks: 29/30 vs 17/30 with the official tools, and no payment made twice.
 
 ---
 
