@@ -10,7 +10,7 @@ import { benchPreFix, benchSummary, benchTasks, usd, type BenchArm, type BenchSu
 export const dynamic = "force-static";
 export const metadata: Metadata = {
   title: "Benchmark — MCPal",
-  description: "Official PayPal MCP tools vs MCPal: same model, same payment tasks, graded on the real PayPal sandbox.",
+  description: "Official PayPal MCP tools vs MCPal: same model, same payment tasks, graded from PayPal's own records.",
 };
 
 /** The Method bullets from bench/results/summary.md, so the page says exactly what the report says. */

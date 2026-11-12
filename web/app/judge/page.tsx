@@ -6,7 +6,7 @@ import { RUNS_PER_HOUR } from "@/lib/ratelimit";
 
 export const metadata: Metadata = {
   title: "Judge console — MCPal",
-  description: "Give an AI agent a business request and watch it move money on the real PayPal sandbox through MCPal.",
+  description: "Give an AI agent a business request and watch it move money through PayPal with MCPal.",
   robots: { index: false },
 };
 

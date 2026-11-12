@@ -7,7 +7,7 @@ import { MCP_BASE } from "@/lib/site";
 export const metadata: Metadata = {
   title: "Install MCPal — connect your AI agent to PayPal",
   description:
-    "Add the hosted MCPal MCP server to Claude Code, Cursor, VS Code or claude.ai in one step, with your own PayPal sandbox demo key.",
+    "Add the hosted MCPal MCP server to Claude Code, Cursor, VS Code or claude.ai in one step, with your own demo key.",
 };
 
 export default function InstallPage() {

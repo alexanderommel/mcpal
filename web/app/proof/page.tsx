@@ -4,8 +4,8 @@ import { sandboxProof, type ProofStep } from "@/lib/data";
 
 export const dynamic = "force-static";
 export const metadata: Metadata = {
-  title: "Sandbox proof — MCPal",
-  description: "Every MCPal verb run against the real PayPal sandbox, with PayPal's own ids and debug ids.",
+  title: "Proof — MCPal",
+  description: "Every MCPal verb run against PayPal, with PayPal's own ids and debug ids.",
 };
 
 function isStep(v: unknown): v is ProofStep {
@@ -38,7 +38,7 @@ export default function ProofPage() {
         <div style={{ padding: "28px 0 8px" }}>
           <div className="eyebrow">Proof · run {proof.run}</div>
           <h1 style={{ fontFamily: "var(--font-display), Georgia, serif", fontWeight: 400, fontSize: "clamp(32px, 5vw, 52px)", margin: "8px 0 10px", lineHeight: 1.05 }}>
-            {counts.ok + counts.blocked} of {steps.length} steps behaved as designed on the real PayPal sandbox
+            {counts.ok + counts.blocked} of {steps.length} steps behaved as designed on PayPal
           </h1>
           <p className="lede">
             {counts.ok} moved money as asked · {counts.blocked} were safety checks that correctly refused to move money (approval limit, injected price, repeated refund, new payee, reused reference)
