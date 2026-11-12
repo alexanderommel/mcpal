@@ -20,7 +20,7 @@ Each check cites the official module and test function it mirrors and the spec s
 | `shopping/order/order_test.py` | partial | 1/1 | 1/1 | GET /orders/{id} and expectations are checked. PUT /orders/{id} (platform-written fulfillment events and adjustments) is unsupported; shipping and refunds go through the merchant's own MCPal actions instead. |
 | `shopping/validation/validation_test.py` | covered | 5/5 | 5/5 |  |
 | `shopping/validation/invalid_input_test.py` | unsupported | - | - | Needs PUT /orders/{id}, which is not implemented. |
-| `common/payments/card_credential_test.py` | covered | 1/1 | 1/1 | The card number is never forwarded: the sandbox handler charges PayPal's published sandbox test card through MCPal. |
+| `common/payments/card_credential_test.py` | covered | 1/1 | 1/1 | The card number is never forwarded: the handler charges PayPal's published test card through MCPal. |
 | `common/payments/token_binding_test.py` | not checked | - | - | A token with a binding completes (binding accepted but not verified). |
 | `common/payments/ap2_test.py` | unsupported | - | - | AP2 mandates are ignored, not verified. |
 | `shopping/order/webhook_test.py` | unsupported | - | - | No order webhooks are delivered to the platform. |

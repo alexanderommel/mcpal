@@ -22,7 +22,7 @@ export const HANDLERS = {
   paypal: {
     id: "mcpal_paypal_sandbox",
     name: "com.paypal.sandbox.mcpal",
-    note: "Any credential.token (or a card credential) is settled by MCPal on the PayPal sandbox with PayPal's published sandbox test card. The token 'fail_token' simulates a decline.",
+    note: "Any credential.token (or a card credential) is settled by MCPal on PayPal with PayPal's published test card. The token 'fail_token' simulates a decline.",
   },
   mock: {
     id: "mock_payment_handler",

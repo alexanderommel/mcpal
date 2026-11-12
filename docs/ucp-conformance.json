@@ -170,7 +170,7 @@
       "official_module": "common/payments/card_credential_test.py",
       "our_module": "payments/card_credential",
       "coverage": "covered",
-      "note": "The card number is never forwarded: the sandbox handler charges PayPal's published sandbox test card through MCPal.",
+      "note": "The card number is never forwarded: the handler charges PayPal's published test card through MCPal.",
       "results": {
         "local": {
           "pass": 1,

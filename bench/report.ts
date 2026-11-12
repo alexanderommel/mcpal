@@ -129,7 +129,7 @@ function chartSvg(stats: ReturnType<typeof armStats>[], n: number): string {
     g += `<line x1="${x0 - 10}" y1="${base}" x2="${x0 + 2 * barW + gap + 10}" y2="${base}" stroke="#999"/>`;
   });
   const m = stats[0]?.byTask.values().next().value?.[0];
-  const foot = `Same model (${m?.provider}/${m?.model}), same ${n} payment tasks, ${reps} runs each, graded on real PayPal sandbox state.`;
+  const foot = `Same model (${m?.provider}/${m?.model}), same ${n} payment tasks, ${reps} runs each, graded from PayPal's own records.`;
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" font-family="Helvetica, Arial, sans-serif"><rect width="100%" height="100%" fill="#fff"/>${g}<text x="${W / 2}" y="${H - 30}" text-anchor="middle" font-size="16" fill="#555">${foot}</text></svg>`;
 }
 

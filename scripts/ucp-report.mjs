@@ -18,7 +18,7 @@ const MODULES = [
   ["shopping/order/order_test.py", "order/order", "partial", "GET /orders/{id} and expectations are checked. PUT /orders/{id} (platform-written fulfillment events and adjustments) is unsupported; shipping and refunds go through the merchant's own MCPal actions instead."],
   ["shopping/validation/validation_test.py", "validation/validation", "covered", ""],
   ["shopping/validation/invalid_input_test.py", "", "unsupported", "Needs PUT /orders/{id}, which is not implemented."],
-  ["common/payments/card_credential_test.py", "payments/card_credential", "covered", "The card number is never forwarded: the sandbox handler charges PayPal's published sandbox test card through MCPal."],
+  ["common/payments/card_credential_test.py", "payments/card_credential", "covered", "The card number is never forwarded: the handler charges PayPal's published test card through MCPal."],
   ["common/payments/token_binding_test.py", "", "not checked", "A token with a binding completes (binding accepted but not verified)."],
   ["common/payments/ap2_test.py", "", "unsupported", "AP2 mandates are ignored, not verified."],
   ["shopping/order/webhook_test.py", "", "unsupported", "No order webhooks are delivered to the platform."],
